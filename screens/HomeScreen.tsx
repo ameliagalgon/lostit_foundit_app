@@ -1,11 +1,11 @@
 import React from "react";
-import {Button, StyleSheet, Text, View} from "react-native";
-
+import { StyleSheet, Text, View} from "react-native";
 import {
     NavigationScreenComponent,
     NavigationScreenProps,
     NavigationStackScreenOptions
 } from "react-navigation";
+import ButtonDefault from '../components/Ui/ButtonDefault';
 import { ROUTES } from "../constants/routes";
 
 const styles = StyleSheet.create({
@@ -31,16 +31,16 @@ export default class HomeScreen extends React.PureComponent<NavigationScreenProp
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>Lost it? Found it!</Text>
-                <Button
+                <ButtonDefault
                     title="Log in"
-                    onPress={() => {
+                    handleClick={() => {
                         /* 1. Navigate to the Details route with params */
                         this.props.navigation.navigate(ROUTES.Login);
                     }}
                 />
-                <Button
+                <ButtonDefault
                     title={"Sign up"}
-                    onPress={() => {
+                    handleClick={() => {
                         this.props.navigation.navigate(ROUTES.Signup)
                     }}
                 />
