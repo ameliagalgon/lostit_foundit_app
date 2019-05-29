@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, KeyboardAvoidingView, StyleSheet, View } from 'react-native';
+import { Text, KeyboardAvoidingView, StyleSheet } from 'react-native';
 import ButtonDefault from '../components/Ui/ButtonDefault';
 import Input from '../components/Ui/Input';
 import {NavigationScreenProps} from "react-navigation";

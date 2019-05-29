@@ -1,9 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View} from "react-native";
 import {
-    NavigationScreenComponent,
     NavigationScreenProps,
-    NavigationStackScreenOptions
 } from "react-navigation";
 import ButtonDefault from '../components/Ui/ButtonDefault';
 import { ROUTES } from "../store/constants/routes";

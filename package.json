@@ -1,22 +1,47 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
+  "name": "lostit_foundit",
+  "version": "1.0.0",
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "jest",
+    "lint": "tslint src/**/*.ts",
+    "tsc": "tsc",
+    "clean": "rimraf build",
+    "build": "yarn run clean && yarn run tsc --",
+    "watch": "yarn run build -- -w",
+    "watchAndRunAndroid": "concurrently \"yarn run watch\" \"yarn run android\"",
+    "buildRunAndroid": "yarn run build && yarn run watchAndRunAndroid ",
+    "watchAndRunIOS": "concurrently \"yarn run watch\" \"yarn run ios\"",
+    "buildRunIOS": "yarn run build && yarn run watchAndRunIOS ",
+    "watchAndStart": "concurrently \"yarn run watch\" \"yarn run start\"",
+    "buildAndStart": "yarn run build && yarn run watchAndStart "
   },
   "dependencies": {
     "expo": "^31.0.2",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
+    "react-native-scripts": "^2.0.1",
     "react-native-vector-icons": "^6.4.2",
     "react-navigation": "^3.11.0"
   },
   "devDependencies": {
     "@types/expo": "^32.0.13",
+    "@types/jest": "^24.0.13",
+    "@types/react": "^16.8.19",
+    "@types/react-dom": "^16.8.4",
     "@types/react-native": "^0.57.60",
+    "@types/react-test-renderer": "^16.8.1",
     "babel-preset-expo": "^5.0.0",
+    "concurrently": "^4.1.0",
+    "jest": "^24.8.0",
+    "react-native-typescript-transformer": "^1.2.12",
+    "rimraf": "^2.6.3",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.16.0",
     "typescript": "^3.5.1"
   },
   "private": true
