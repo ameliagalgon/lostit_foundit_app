@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     },
 })
 
-export default class ButtonDefault extends React.PureComponent<Props> {
+class ButtonDefault extends React.PureComponent<Props> {
     render() {
         const { title, handleClick } = this.props;
         return (
@@ -28,3 +28,5 @@ export default class ButtonDefault extends React.PureComponent<Props> {
         )
     }
 }
+
+export default ButtonDefault;

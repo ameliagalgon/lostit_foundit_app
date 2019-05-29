@@ -1,5 +1,6 @@
 export enum ROUTES {
-    Home = "Home",
+    Welcome = "Welcome",
     Login = "Login",
     Signup = "Signup",
+    HomePage = "Home"
 }

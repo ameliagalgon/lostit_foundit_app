@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class Input extends React.PureComponent<Props, State> {
+class Input extends React.PureComponent<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -61,3 +61,5 @@ export default class Input extends React.PureComponent<Props, State> {
         );
     }
 }
+
+export default Input;
