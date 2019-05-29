@@ -6,10 +6,6 @@ import {NavigationScreenProps} from "react-navigation";
 import { ROUTES } from "../store/constants/routes";
 
 class LoginScreen extends React.PureComponent<NavigationScreenProps> {
-    static navigationOptions = {
-        title: 'Log in'
-    };
-
     handleLogin = () => {
         const { navigation: { navigate } } = this.props;
         navigate(ROUTES.HomePage, {name: "Amelia Galgon"});

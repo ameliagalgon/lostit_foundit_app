@@ -6,10 +6,27 @@ import HomeScreen from './screens/HomeScreen';
 import { ROUTES } from "./store/constants/routes";
 
 const RootStack = createStackNavigator({
-    [ROUTES.Welcome]: { screen: WelcomeScreen },
-    [ROUTES.Login]: { screen: LoginScreen },
-    [ROUTES.Signup]: { screen: SignupScreen },
-    [ROUTES.HomePage]: { screen: HomeScreen },
+    [ROUTES.Welcome]: {
+        screen: WelcomeScreen
+    },
+    [ROUTES.Login]: {
+        screen: LoginScreen,
+        navigationOptions: {
+            title: 'Log in'
+        }
+    },
+    [ROUTES.Signup]: {
+        screen: SignupScreen,
+        navigationOptions: {
+            title: 'Sign up'
+        }
+    },
+    [ROUTES.HomePage]: {
+        screen: HomeScreen,
+        navigationOptions: {
+            title: 'Home'
+        }
+    },
 }, {
     initialRouteName: ROUTES.Welcome,
 });

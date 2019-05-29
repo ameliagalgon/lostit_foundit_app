@@ -23,10 +23,6 @@ const styles = StyleSheet.create({
 })
 
 class WelcomeScreen extends React.PureComponent<NavigationScreenProps> {
-    static navigationOptions = {
-        title: 'Home'
-    };
-
     render() {
         return (
             <View style={styles.container}>
