@@ -3,7 +3,7 @@ import { Text, KeyboardAvoidingView, StyleSheet } from 'react-native';
 import ButtonDefault from '../components/Ui/ButtonDefault';
 import Input from '../components/Ui/Input';
 import {NavigationScreenProps} from "react-navigation";
-import { ROUTES } from "../store/constants/routes";
+import { ROUTES } from "../routes";
 
 class LoginScreen extends React.PureComponent<NavigationScreenProps> {
     handleLogin = () => {

@@ -3,7 +3,13 @@ import WelcomeScreen from "./screens/WelcomeScreen";
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import HomeScreen from './screens/HomeScreen';
-import { ROUTES } from "./store/constants/routes";
+
+export enum ROUTES {
+    Welcome = "Welcome",
+    Login = "Login",
+    Signup = "Signup",
+    HomePage = "Home"
+}
 
 const RootStack = createStackNavigator({
     [ROUTES.Welcome]: {
