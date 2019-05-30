@@ -1,10 +1,15 @@
 import React from "react";
 import { StyleSheet, Text, View} from "react-native";
+import User from '../store/Auth/models/user';
 import {
     NavigationScreenProps,
 } from "react-navigation";
 import ButtonDefault from '../components/Ui/ButtonDefault';
-import { ROUTES } from "../store/constants/paths";
+import { ROUTES } from "../store/constants";
+
+interface Props {
+    user: User;
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -18,9 +23,11 @@ const styles = StyleSheet.create({
         textAlign: "center",
         margin: 10
     },
-})
+});
 
-class WelcomeScreen extends React.PureComponent<NavigationScreenProps> {
+type FinalProps = NavigationScreenProps & Props
+
+class WelcomeScreen extends React.PureComponent<FinalProps> {
     render() {
         return (
             <View style={styles.container}>

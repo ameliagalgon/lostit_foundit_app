@@ -21,13 +21,19 @@
     "buildAndStart": "yarn run build && yarn run watchAndStart "
   },
   "dependencies": {
+    "@types/react-redux": "^7.0.9",
     "expo": "^31.0.2",
     "expokit": "^31.1.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-native-scripts": "^2.0.1",
     "react-native-vector-icons": "^6.4.2",
-    "react-navigation": "^3.11.0"
+    "react-navigation": "^3.11.0",
+    "react-redux": "^7.0.3",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-saga": "^1.0.2",
+    "reselect": "^4.0.0"
   },
   "devDependencies": {
     "@types/expo": "^32.0.13",

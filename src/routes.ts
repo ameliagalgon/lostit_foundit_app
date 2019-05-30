@@ -3,7 +3,7 @@ import WelcomeScreen from "./screens/WelcomeScreen";
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import HomeScreen from './screens/HomeScreen';
-import { ROUTES } from './store/constants/paths';
+import { ROUTES } from './store/constants';
 
 const RootStack = createStackNavigator({
     [ROUTES.Welcome]: {
