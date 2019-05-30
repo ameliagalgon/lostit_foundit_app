@@ -4,7 +4,7 @@ import ButtonDefault from '../components/Ui/ButtonDefault';
 import Input from '../components/Ui/Input';
 import {NavigationScreenProps} from "react-navigation";
 import User from '../store/models/User';
-import { ROUTES } from "../routes";
+import { ROUTES } from "../store/constants/paths";
 
 class LoginScreen extends React.PureComponent<NavigationScreenProps> {
     handleLogin = () => {
@@ -13,7 +13,7 @@ class LoginScreen extends React.PureComponent<NavigationScreenProps> {
             firstName: "Amelia",
             lastName: "Galgon",
             email: "agalgon@gmail.com"
-        }
+        };
         navigate(ROUTES.HomePage, {user: defaultUser});
     }
 

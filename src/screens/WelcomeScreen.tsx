@@ -4,7 +4,7 @@ import {
     NavigationScreenProps,
 } from "react-navigation";
 import ButtonDefault from '../components/Ui/ButtonDefault';
-import { ROUTES } from "../routes";
+import { ROUTES } from "../store/constants/paths";
 
 const styles = StyleSheet.create({
     container: {
