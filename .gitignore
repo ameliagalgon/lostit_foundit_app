@@ -7,3 +7,4 @@ npm-debug.*
 *.key
 *.mobileprovision
 .idea
+.DS_Store
