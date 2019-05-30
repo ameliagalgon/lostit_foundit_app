@@ -23,10 +23,7 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "app.lostitfoundit",
-      "publishBundlePath": "ios/lost-it--found-it-/Supporting/shell-app.bundle",
-      "publishManifestPath": "ios/lost-it--found-it-/Supporting/shell-app-manifest.json"
+      "supportsTablet": true
     },
     "packagerOpts": {
       "sourceExts": [
@@ -35,17 +32,6 @@
         "js"
       ],
       "transformer": "node_modules/react-native-typescript-transformer/index.js"
-    },
-    "isDetached": true,
-    "detach": {
-      "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.9.0-sdk31.0.0-250a3991-b623-4f9c-b07f-0b9ed7e8c4c9.tar.gz",
-      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.9.2-sdk31.0.0-f0c63b44-0556-45f2-b4b9-ff5082f9ef72.tar.gz"
-    },
-    "scheme": "exp6485bb9d8a9c4282a1517bf3313ea0d2",
-    "android": {
-      "package": "com.lostitfoundit",
-      "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
-      "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
     }
   }
 }
