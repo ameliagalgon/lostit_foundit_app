@@ -23,7 +23,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "app.lostitfoundit"
+    },
+    "android": {
+      "package": "com.lostitfoundit"
     },
     "packagerOpts": {
       "sourceExts": [
