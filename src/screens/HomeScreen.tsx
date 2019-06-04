@@ -1,7 +1,7 @@
 import React from 'react';
 // import { delay } from 'redux-saga';
-import {View, Text, ActivityIndicator, StyleSheet, FlatList} from 'react-native';
-import { Header } from "react-native-elements";
+import {View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { Header, ListItem } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import ButtonDefault from "../components/Ui/ButtonDefault";
 
@@ -11,7 +11,6 @@ interface Props {
 
 }
 
-// const keyExtractor = ({ id }: any) => id;
 type FinalProps = NavigationScreenProps & Props;
 
 class HomeScreen extends React.PureComponent<FinalProps> {
@@ -50,16 +49,6 @@ class HomeScreen extends React.PureComponent<FinalProps> {
         console.log("Found item");
     }
 
-    renderItem = ({ item }: any) => {
-        const { id, name } = item;
-        return (
-            <div key={id}>
-                <Text>{id}</Text>
-                <Text>{name}</Text>
-            </div>
-        );
-    }
-
     render() {
         const { navigation: {state: { params } } } = this.props;
         const { loading, items, error } = this.state;
@@ -80,11 +69,14 @@ class HomeScreen extends React.PureComponent<FinalProps> {
                         }
                         <ButtonDefault title={"Lost something"} handleClick={this.handleGoToLostForm}/>
                         <ButtonDefault title={"Found something"} handleClick={this.handleGoToFoundForm}/>
-                        <FlatList
-                            data={items}
-                            // keyExtractor={keyExtractor}
-                            renderItem={this.renderItem}
-                        />
+                        <View>{
+                            items.map((item: any, i) => (
+                                <ListItem
+                                    key={i}
+                                    title={item.name}
+                                />
+                            ))
+                        }</View>
                     </View>
                     }
                 </View>
