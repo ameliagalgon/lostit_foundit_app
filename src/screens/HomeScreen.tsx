@@ -1,27 +1,44 @@
 import React from 'react';
 // import { delay } from 'redux-saga';
-import { View, Text, ActivityIndicator } from 'react-native';
+import {View, Text, ActivityIndicator, StyleSheet, FlatList} from 'react-native';
+import { Header } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import ButtonDefault from "../components/Ui/ButtonDefault";
+
+import { fetchItems } from '../utils/api';
 
 interface Props {
 
 }
 
+// const keyExtractor = ({ id }: any) => id;
 type FinalProps = NavigationScreenProps & Props;
 
 class HomeScreen extends React.PureComponent<FinalProps> {
+    static navigationOptions = {
+        header: null,
+    };
+
     state = {
-        loading: true
+        items: [],
+        loading: true,
+        error: false,
     };
 
     async componentDidMount() {
         try {
+            const items = await fetchItems();
+            console.log(items);
             this.setState({
-                loading: false
+                items,
+                loading: false,
+                error: false
             });
         } catch (e) {
-            console.log(e);
+            this.setState({
+                loading: false,
+                error: true
+            });
         }
     }
 
@@ -33,24 +50,58 @@ class HomeScreen extends React.PureComponent<FinalProps> {
         console.log("Found item");
     }
 
+    renderItem = ({ item }: any) => {
+        const { id, name } = item;
+        return (
+            <div key={id}>
+                <Text>{id}</Text>
+                <Text>{name}</Text>
+            </div>
+        );
+    }
+
     render() {
         const { navigation: {state: { params } } } = this.props;
-        const { loading } = this.state;
+        const { loading, items, error } = this.state;
+
+        console.log(loading);
         return (
-            <View>
-                {loading && <ActivityIndicator size={'large'}/>}
-                {!loading &&
-                <View>
-                    {params && params.user &&
-                    <Text>Hi, {params.user.firstName}</Text>
+            <View style={styles.container}>
+                <Header
+                    centerComponent={{ text: 'Lost it? Found it!', style: { color: '#fff' } }}
+                />
+                <View style={styles.content}>
+                    {loading && <ActivityIndicator size={'large'}/>}
+                    {error && <Text>Error...</Text>}
+                    {!loading && !error &&
+                    <View>
+                        {params && params.user &&
+                        <Text>Hi, {params.user.firstName}</Text>
+                        }
+                        <ButtonDefault title={"Lost something"} handleClick={this.handleGoToLostForm}/>
+                        <ButtonDefault title={"Found something"} handleClick={this.handleGoToFoundForm}/>
+                        <FlatList
+                            data={items}
+                            // keyExtractor={keyExtractor}
+                            renderItem={this.renderItem}
+                        />
+                    </View>
                     }
-                    <ButtonDefault title={"Lost something"} handleClick={this.handleGoToLostForm}/>
-                    <ButtonDefault title={"Found something"} handleClick={this.handleGoToFoundForm}/>
                 </View>
-                }
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
+    content: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
+});
 
 export default HomeScreen;

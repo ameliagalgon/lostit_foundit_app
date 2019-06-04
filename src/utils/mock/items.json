@@ -1,0 +1,23 @@
+{
+  "results": [
+    {
+      "itemId": 1,
+      "name": "Item 1",
+      "location": {
+        "street": "3856 new road",
+        "city": "trim",
+        "state": "kildare",
+        "postcode": 46645,
+        "coordinates": {
+          "latitude": "23.5084",
+          "longitude": "-80.6193"
+        }
+      },
+      "user": {
+        "name": {"first": "Kill", "last": "Bill"},
+        "email": "testuser@gmail.com",
+      },
+      "image": "https://randomuser.me/api/portraits/men/55.jpg",
+    }
+  ]
+}

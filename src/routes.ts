@@ -7,7 +7,7 @@ import { ROUTES } from './store/constants';
 
 const RootStack = createStackNavigator({
     [ROUTES.Welcome]: {
-        screen: WelcomeScreen
+        screen: WelcomeScreen,
     },
     [ROUTES.Login]: {
         screen: LoginScreen,
