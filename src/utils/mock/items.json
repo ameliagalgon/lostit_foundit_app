@@ -18,6 +18,82 @@
         "email": "testuser@gmail.com",
       },
       "image": "https://randomuser.me/api/portraits/men/55.jpg",
+    },
+    {
+      "itemId": 2,
+      "name": "Item 2",
+      "location": {
+        "street": "3856 new road",
+        "city": "trim",
+        "state": "kildare",
+        "postcode": 46645,
+        "coordinates": {
+          "latitude": "23.5084",
+          "longitude": "-80.6193"
+        }
+      },
+      "user": {
+        "name": {"first": "Kill", "last": "Bill"},
+        "email": "testuser@gmail.com",
+      },
+      "image": "https://randomuser.me/api/portraits/men/55.jpg",
+    },
+    {
+      "itemId": 3,
+      "name": "Item 3",
+      "location": {
+        "street": "3856 new road",
+        "city": "trim",
+        "state": "kildare",
+        "postcode": 46645,
+        "coordinates": {
+          "latitude": "23.5084",
+          "longitude": "-80.6193"
+        }
+      },
+      "user": {
+        "name": {"first": "Kill", "last": "Bill"},
+        "email": "testuser@gmail.com",
+      },
+      "image": "https://randomuser.me/api/portraits/men/55.jpg",
+    },
+    {
+      "itemId": 4,
+      "name": "Item 4",
+      "location": {
+        "street": "3856 new road",
+        "city": "trim",
+        "state": "kildare",
+        "postcode": 46645,
+        "coordinates": {
+          "latitude": "23.5084",
+          "longitude": "-80.6193"
+        }
+      },
+      "user": {
+        "name": {"first": "Kill", "last": "Bill"},
+        "email": "testuser@gmail.com",
+      },
+      "image": "https://randomuser.me/api/portraits/men/55.jpg",
+    },
+    {
+      "itemId": 5,
+      "name": "Item 5",
+      "location": {
+        "street": "3856 new road",
+        "city": "trim",
+        "state": "kildare",
+        "postcode": 46645,
+        "coordinates": {
+          "latitude": "23.5084",
+          "longitude": "-80.6193"
+        }
+      },
+      "user": {
+        "name": {"first": "Kill", "last": "Bill"},
+        "email": "testuser@gmail.com",
+      },
+      "image": "https://randomuser.me/api/portraits/men/55.jpg",
     }
   ]
 }

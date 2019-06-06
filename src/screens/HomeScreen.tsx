@@ -52,7 +52,7 @@ class HomeScreen extends React.PureComponent<FinalProps> {
         }
     }
 
-    handleGoToLostForm = () => {
+    handleToggleLostForm = () => {
         if (this.props.isLostOpen || this.props.isFoundOpen) {
             this.props.closeModal();
         } else {
@@ -60,7 +60,7 @@ class HomeScreen extends React.PureComponent<FinalProps> {
         }
     }
 
-    handleGoToFoundForm = () => {
+    handleToggleFoundForm = () => {
         if (this.props.isLostOpen || this.props.isFoundOpen) {
             this.props.closeModal();
         } else {
@@ -73,7 +73,9 @@ class HomeScreen extends React.PureComponent<FinalProps> {
         const { loading, items, error } = this.state;
 
         const foundBody = (
-            <FoundItemForm/>
+            <FoundItemForm
+                handleToggle={this.handleToggleFoundForm}
+            />
         );
 
         const lostBody = (
@@ -105,8 +107,8 @@ class HomeScreen extends React.PureComponent<FinalProps> {
                         {params && params.user &&
                         <Text>Hi, {params.user.firstName}</Text>
                         }
-                        <ButtonDefault title={"Lost something"} handleClick={this.handleGoToLostForm}/>
-                        <ButtonDefault title={"Found something"} handleClick={this.handleGoToFoundForm}/>
+                        <ButtonDefault title={"Lost something"} handleClick={this.handleToggleLostForm}/>
+                        <ButtonDefault title={"Found something"} handleClick={this.handleToggleFoundForm}/>
                         <View>{
                             items.map((item: any, i) => (
                                 <ListItem
