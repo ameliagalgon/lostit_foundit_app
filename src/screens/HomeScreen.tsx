@@ -60,6 +60,11 @@ class HomeScreen extends React.PureComponent<FinalProps> {
 
     handleGoToFoundForm = () => {
         console.log("Found item");
+        if (this.props.isOpen) {
+            this.props.closeModal();
+        } else {
+            this.props.openModal(LOST_ITEM_FORM, {})
+        }
     }
 
     render() {
@@ -71,6 +76,7 @@ class HomeScreen extends React.PureComponent<FinalProps> {
             <View style={styles.container}>
                 <Modal
                     isOpen={this.props.isOpen}
+                    handleClose={this.props.closeModal}
                 />
                 <Header
                     centerComponent={{ text: 'Lost it? Found it!', style: { color: '#fff' } }}
