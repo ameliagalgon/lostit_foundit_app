@@ -1,5 +1,4 @@
 import React from 'react';
-// import { delay } from 'redux-saga';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { Header, ListItem } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
@@ -11,14 +10,18 @@ import { connect } from "react-redux";
 import { AppState } from "../store/types";
 import { isModalOpen } from "../store/Modals/selectors";
 import Modal from '../components/Shared/Modals/Modal';
+import FoundItemForm from "../containers/Forms/FoundItemForm";
+import LostItemForm from "../containers/Forms/LostItemForm";
 
 interface Props {
-    isOpen: boolean;
+    isLostOpen: boolean;
+    isFoundOpen: boolean;
     openModal: (name: string, params: any) => void;
     closeModal: () => void;
 }
 
 const LOST_ITEM_FORM = "Lost item form";
+const FOUND_ITEM_FORM = "Found item form";
 type FinalProps = NavigationScreenProps & Props;
 
 class HomeScreen extends React.PureComponent<FinalProps> {
@@ -50,8 +53,7 @@ class HomeScreen extends React.PureComponent<FinalProps> {
     }
 
     handleGoToLostForm = () => {
-        console.log("Lost item");
-        if (this.props.isOpen) {
+        if (this.props.isLostOpen || this.props.isFoundOpen) {
             this.props.closeModal();
         } else {
             this.props.openModal(LOST_ITEM_FORM, {})
@@ -59,11 +61,10 @@ class HomeScreen extends React.PureComponent<FinalProps> {
     }
 
     handleGoToFoundForm = () => {
-        console.log("Found item");
-        if (this.props.isOpen) {
+        if (this.props.isLostOpen || this.props.isFoundOpen) {
             this.props.closeModal();
         } else {
-            this.props.openModal(LOST_ITEM_FORM, {})
+            this.props.openModal(FOUND_ITEM_FORM, {})
         }
     }
 
@@ -71,12 +72,27 @@ class HomeScreen extends React.PureComponent<FinalProps> {
         const { navigation: {state: { params } } } = this.props;
         const { loading, items, error } = this.state;
 
-        console.log(loading);
+        const foundBody = (
+            <FoundItemForm/>
+        );
+
+        const lostBody = (
+            <LostItemForm/>
+        );
+
         return (
             <View style={styles.container}>
                 <Modal
-                    isOpen={this.props.isOpen}
+                    isOpen={this.props.isLostOpen}
+                    body={lostBody}
+                    title={"Lost item"}
                     handleClose={this.props.closeModal}
+                />
+                <Modal
+                    isOpen={this.props.isFoundOpen}
+                    handleClose={this.props.closeModal}
+                    title={"Found item"}
+                    body={foundBody}
                 />
                 <Header
                     centerComponent={{ text: 'Lost it? Found it!', style: { color: '#fff' } }}
@@ -119,7 +135,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: AppState) => ({
-    isOpen: isModalOpen(state, {name: LOST_ITEM_FORM})
+    isLostOpen: isModalOpen(state, {name: LOST_ITEM_FORM}),
+    isFoundOpen: isModalOpen(state, {name: FOUND_ITEM_FORM})
 });
 
 const mapDispatchToProps = {

@@ -17,3 +17,8 @@ export const getModalParams = createSelector(
     getModalsState,
     (state: ModalsState) => state.params
 );
+
+export const getOpenModalName = createSelector(
+    getModalsState,
+    (state: ModalsState) => !!state.name ? state.name : ''
+);
