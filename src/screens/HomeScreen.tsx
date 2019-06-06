@@ -6,6 +6,8 @@ import { NavigationScreenProps } from "react-navigation";
 import ButtonDefault from "../components/Ui/ButtonDefault";
 
 import { fetchItems } from '../utils/api';
+import { openModal, closeModal } from "../store/Modals/actionCreators";
+import { connect } from "react-redux";
 
 interface Props {
 
@@ -96,4 +98,9 @@ const styles = StyleSheet.create({
     }
 });
 
-export default HomeScreen;
+const mapDispatchToProps = {
+    openModal,
+    closeModal
+}
+
+export default connect(null, mapDispatchToProps)(HomeScreen);
