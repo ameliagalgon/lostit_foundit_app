@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, KeyboardAvoidingView, StyleSheet } from 'react-native';
-import ButtonDefault from '../components/Ui/ButtonDefault';
-import Input from '../components/Ui/Input';
+import ButtonDefault from '../components/Shared/Ui/ButtonDefault';
+import Input from '../components/Shared/Ui/Input';
 import {NavigationScreenProps} from "react-navigation";
 import User from '../store/Auth/models/User';
 import { ROUTES } from "../store/constants";

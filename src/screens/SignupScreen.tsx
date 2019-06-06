@@ -3,8 +3,8 @@ import { Text, KeyboardAvoidingView, StyleSheet} from 'react-native';
 import {NavigationScreenProps} from "react-navigation";
 import User from "../store/Auth/models/user";
 import {ROUTES} from "../store/constants";
-import Input from "../components/Ui/Input";
-import ButtonDefault from "../components/Ui/ButtonDefault";
+import Input from "../components/Shared/Ui/Input";
+import ButtonDefault from "../components/Shared/Ui/ButtonDefault";
 
 class SignupScreen extends React.PureComponent<NavigationScreenProps> {
     handleLogin = () => {

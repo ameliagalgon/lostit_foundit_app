@@ -5,7 +5,7 @@ import User from '../store/Auth/models/user';
 import {
     NavigationScreenProps,
 } from "react-navigation";
-import ButtonDefault from '../components/Ui/ButtonDefault';
+import ButtonDefault from '../components/Shared/Ui/ButtonDefault';
 import { ROUTES } from "../store/constants";
 // import { IOS_CLIENT_ID } from 'react-native-dotenv';
 
