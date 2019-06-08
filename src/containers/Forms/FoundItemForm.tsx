@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View } from "react-native";
+import { Permissions, Camera } from "expo";
 import InitialFoundItemForm from "../../components/Forms/FoundItem/InitialFoundItemForm";
 import FoundItemDescriptionForm from '../../components/Forms/FoundItem/FoundItemDescriptionForm';
 import CompleteFoundItemForm from "../../components/Forms/FoundItem/CompleteFoundItemForm";
@@ -10,6 +11,7 @@ interface Props {
 
 interface State {
     stage: number;
+    hasCameraPermissions: boolean;
 }
 
 enum FoundItemStages {
@@ -22,11 +24,12 @@ class FoundItemForm extends React.PureComponent<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            stage: FoundItemStages.INITIAL
+            stage: FoundItemStages.INITIAL,
+            hasCameraPermissions: false
         }
     }
     handleOpenCamera = () => {
-        console.log("open camera");
+
     }
 
     handleGoToNext = () => {
