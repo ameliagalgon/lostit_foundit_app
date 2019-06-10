@@ -1,7 +1,8 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import InitialLostItemForm from "../components/Forms/LostItem/InitialLostItemForm";
-import DateAndTimeLostItemForm from "../components/Forms/LostItem/DateAndTimeLostItemForm";
+import DateTimeLostItemForm from "../components/Forms/LostItem/DateTimeLostItemForm";
+import DescriptionLostItemForm from "../components/Forms/LostItem/DescriptionLostItemForm";
 
 interface Props {
 
@@ -13,7 +14,10 @@ interface State {
 
 enum LostItemFormStages {
     INITIAL,
-    DATEANDTIME,
+    DATETIME,
+    LOCATION, // need to include location
+    DESCRIPTION,
+    COMPLETE
 }
 
 class LostItemForm extends React.PureComponent<Props, State> {
@@ -21,15 +25,52 @@ class LostItemForm extends React.PureComponent<Props, State> {
         stage: LostItemFormStages.INITIAL
     };
 
+    handleGoToNextStage = () => {
+        const { stage } = this.state;
+        if (stage === LostItemFormStages.INITIAL) {
+            this.setState({
+                stage: LostItemFormStages.DATETIME
+            })
+        } else if (stage === LostItemFormStages.DATETIME) {
+            this.setState({
+                stage: LostItemFormStages.DESCRIPTION
+            });
+        } else if (stage === LostItemFormStages.DESCRIPTION) {
+            this.setState({
+                stage: LostItemFormStages.COMPLETE
+            });
+        } else if (stage === LostItemFormStages.COMPLETE) {
+            this.setState({
+                stage: LostItemFormStages.INITIAL
+            });
+        }
+    }
+
+    handleGoToDescription = () => {
+        this.setState({
+            stage: LostItemFormStages.DESCRIPTION
+        })
+    }
+
+
+
     render() {
         const { stage } = this.state;
         return (
             <View style={styles.container}>
                 {stage === LostItemFormStages.INITIAL &&
-                    <InitialLostItemForm/>
+                    <InitialLostItemForm
+                        handleGoToDescription={this.handleGoToDescription}
+                        handleGoToDateTimePicker={this.handleGoToNextStage}
+                    />
                 }
-                {stage === LostItemFormStages.DATEANDTIME &&
-                    <DateAndTimeLostItemForm/>
+                {stage === LostItemFormStages.DATETIME &&
+                    <DateTimeLostItemForm
+                        handleNext={this.handleGoToNextStage}
+                    />
+                }
+                {stage === LostItemFormStages.DESCRIPTION &&
+                    <DescriptionLostItemForm handleNext={this.handleGoToNextStage}/>
                 }
             </View>
         );

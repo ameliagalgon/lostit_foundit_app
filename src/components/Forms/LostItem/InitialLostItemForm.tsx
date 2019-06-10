@@ -6,7 +6,8 @@ import { Location, Permissions } from "expo";
 type LocationData = Location.LocationData;
 
 interface Props {
-
+    handleGoToDateTimePicker: () => void;
+    handleGoToDescription: () => void;
 }
 
 interface State {
@@ -31,7 +32,7 @@ class InitialLostItemForm extends React.PureComponent<Props, State> {
             this.setState({
                 location,
                 timestamp: location.timestamp
-            }, () => console.log(this.state.location));
+            }, () => this.props.handleGoToDescription); // go to new stage after getting location
         } else {
             Alert.alert(
                 'Alert',
@@ -59,7 +60,7 @@ class InitialLostItemForm extends React.PureComponent<Props, State> {
             <View style={styles.container}>
                 <Text>Would you like to record to current time and location for the lost item?</Text>
                 <ButtonDefault title={"Yes"} handleClick={this.getCurrentLocationAsync}/>
-                <ButtonDefault title={"No. Record different time and location"} handleClick={() => {}}/>
+                <ButtonDefault title={"No. Record different time and location"} handleClick={this.props.handleGoToDateTimePicker}/>
                 {this.state.location &&
                     <View>
                         <Text>Latitude: {this.state.location.coords.latitude}</Text>
