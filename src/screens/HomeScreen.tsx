@@ -3,15 +3,14 @@ import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { Header, ListItem } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import ButtonDefault from "../components/Shared/Ui/ButtonDefault";
+import { Location } from "expo";
 
 import { fetchItems } from '../utils/api';
 import { openModal, closeModal } from "../store/Modals/actionCreators";
 import { connect } from "react-redux";
 import { AppState } from "../store/types";
 import { isModalOpen } from "../store/Modals/selectors";
-import Modal from '../components/Shared/Modals/Modal';
-import FoundItemForm from "../containers/Forms/FoundItemForm";
-import LostItemForm from "../containers/Forms/LostItemForm";
+// import Modal from '../components/Shared/Modals/Modal';
 import { ROUTES } from "../store/constants";
 
 interface Props {
@@ -38,8 +37,8 @@ class HomeScreen extends React.PureComponent<FinalProps> {
 
     async componentDidMount() {
         try {
+            console.log(Location);
             const items = await fetchItems();
-            console.log(items);
             this.setState({
                 items,
                 loading: false,
@@ -54,11 +53,14 @@ class HomeScreen extends React.PureComponent<FinalProps> {
     }
 
     handleToggleLostForm = () => {
+        /*
         if (this.props.isLostOpen || this.props.isFoundOpen) {
             this.props.closeModal();
         } else {
             this.props.openModal(LOST_ITEM_FORM, {})
         }
+        */
+        this.props.navigation.navigate(ROUTES.LostForm);
     }
 
     handleToggleFoundForm = () => {
@@ -76,6 +78,7 @@ class HomeScreen extends React.PureComponent<FinalProps> {
         const { navigation: {state: { params } } } = this.props;
         const { loading, items, error } = this.state;
 
+        /*
         const foundBody = (
             <FoundItemForm
                 handleToggle={this.handleToggleFoundForm}
@@ -86,9 +89,9 @@ class HomeScreen extends React.PureComponent<FinalProps> {
         const lostBody = (
             <LostItemForm/>
         );
+        */
 
-        return (
-            <View style={styles.container}>
+        /*
                 <Modal
                     isOpen={this.props.isLostOpen}
                     body={lostBody}
@@ -101,6 +104,10 @@ class HomeScreen extends React.PureComponent<FinalProps> {
                     title={"Found item"}
                     body={foundBody}
                 />
+                */
+
+        return (
+            <View style={styles.container}>
                 <Header
                     centerComponent={{ text: 'Lost it? Found it!', style: { color: '#fff' } }}
                 />

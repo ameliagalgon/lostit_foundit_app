@@ -5,4 +5,5 @@ export enum ROUTES {
     HomePage = "Home",
     Camera = "Camera",
     FoundForm = "Found Item Form",
+    LostForm = "Lost Item Form",
 }

@@ -56,6 +56,10 @@ class FoundItemForm extends React.PureComponent<FinalProps, State> {
         }
     }
 
+    handleClose = () => {
+        this.props.navigation.navigate(ROUTES.HomePage);
+    }
+
     render() {
         return (
             <View>
@@ -72,7 +76,7 @@ class FoundItemForm extends React.PureComponent<FinalProps, State> {
                 }
                 { this.state.stage === FoundItemStages.COMPLETE &&
                 <CompleteFoundItemForm
-                    handleClose={this.props.handleToggle}
+                    handleClose={this.handleClose}
                     handleNext={this.handleGoToNext}
                 />
                 }
