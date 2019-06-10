@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
-import { Header, ListItem } from "react-native-elements";
+import { Header } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import ButtonDefault from "../components/Shared/Ui/ButtonDefault";
 import { Location } from "expo";
@@ -76,7 +76,7 @@ class HomeScreen extends React.PureComponent<FinalProps> {
 
     render() {
         const { navigation: {state: { params } } } = this.props;
-        const { loading, items, error } = this.state;
+        const { loading, error } = this.state;
 
         /*
         const foundBody = (
@@ -121,14 +121,7 @@ class HomeScreen extends React.PureComponent<FinalProps> {
                         }
                         <ButtonDefault title={"Lost something"} handleClick={this.handleToggleLostForm}/>
                         <ButtonDefault title={"Found something"} handleClick={this.handleToggleFoundForm}/>
-                        <View>{
-                            items.map((item: any, i) => (
-                                <ListItem
-                                    key={i}
-                                    title={item.name}
-                                />
-                            ))
-                        }</View>
+                        <ButtonDefault title={"My Lost items"} handleClick={() => this.props.navigation.navigate(ROUTES.LostItems)}/>
                     </View>
                     }
                 </View>

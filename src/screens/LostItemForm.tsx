@@ -3,6 +3,9 @@ import {View, StyleSheet} from 'react-native';
 import InitialLostItemForm from "../components/Forms/LostItem/InitialLostItemForm";
 import DateTimeLostItemForm from "../components/Forms/LostItem/DateTimeLostItemForm";
 import DescriptionLostItemForm from "../components/Forms/LostItem/DescriptionLostItemForm";
+import {NavigationScreenProps} from "react-navigation";
+import {ROUTES} from "../store/constants";
+import CompleteLostItemForm from "../components/Forms/LostItem/CompleteLostItemForm";
 
 interface Props {
 
@@ -20,7 +23,9 @@ enum LostItemFormStages {
     COMPLETE
 }
 
-class LostItemForm extends React.PureComponent<Props, State> {
+type FinalProps = NavigationScreenProps & Props;
+
+class LostItemForm extends React.PureComponent<FinalProps, State> {
     state = {
         stage: LostItemFormStages.INITIAL
     };
@@ -52,7 +57,9 @@ class LostItemForm extends React.PureComponent<Props, State> {
         })
     }
 
-
+    handleClose = () => {
+        this.props.navigation.navigate(ROUTES.HomePage)
+    }
 
     render() {
         const { stage } = this.state;
@@ -71,6 +78,12 @@ class LostItemForm extends React.PureComponent<Props, State> {
                 }
                 {stage === LostItemFormStages.DESCRIPTION &&
                     <DescriptionLostItemForm handleNext={this.handleGoToNextStage}/>
+                }
+                {stage === LostItemFormStages.COMPLETE &&
+                    <CompleteLostItemForm
+                        handleNext={this.handleGoToNextStage}
+                        handleClose={this.handleClose}
+                    />
                 }
             </View>
         );

@@ -7,6 +7,7 @@ import CameraScreen from "./screens/CameraScreen";
 import FoundItemFormScreen from "./screens/FoundItemForm";
 import LostItemFormScreen from './screens/LostItemForm';
 import { ROUTES } from './store/constants';
+import MyLostItems from "./screens/MyLostItems";
 
 const RootStack = createStackNavigator({
     [ROUTES.Welcome]: {
@@ -42,6 +43,9 @@ const RootStack = createStackNavigator({
             title: 'Camera'
         }
     },
+    [ROUTES.LostItems]: {
+        screen: MyLostItems
+    }
 }, {
     initialRouteName: ROUTES.Welcome,
 });
