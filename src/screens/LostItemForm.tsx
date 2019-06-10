@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import InitialLostItemForm from "../components/Forms/LostItem/InitialLostItemForm";
+import DateAndTimeLostItemForm from "../components/Forms/LostItem/DateAndTimeLostItemForm";
 
 interface Props {
 
@@ -12,6 +13,7 @@ interface State {
 
 enum LostItemFormStages {
     INITIAL,
+    DATEANDTIME,
 }
 
 class LostItemForm extends React.PureComponent<Props, State> {
@@ -25,6 +27,9 @@ class LostItemForm extends React.PureComponent<Props, State> {
             <View style={styles.container}>
                 {stage === LostItemFormStages.INITIAL &&
                     <InitialLostItemForm/>
+                }
+                {stage === LostItemFormStages.DATEANDTIME &&
+                    <DateAndTimeLostItemForm/>
                 }
             </View>
         );

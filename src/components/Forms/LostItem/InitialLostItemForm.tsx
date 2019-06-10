@@ -11,6 +11,7 @@ interface Props {
 
 interface State {
     location: LocationData | any;
+    timestamp: number;
 }
 
 class InitialLostItemForm extends React.PureComponent<Props, State> {
@@ -18,7 +19,8 @@ class InitialLostItemForm extends React.PureComponent<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            location: null
+            location: null,
+            timestamp: 0,
         };
     }
 
@@ -26,7 +28,10 @@ class InitialLostItemForm extends React.PureComponent<Props, State> {
         let { status } = await Permissions.askAsync(Permissions.LOCATION);
         if (status === 'granted') {
             let location = await Location.getCurrentPositionAsync({accuracy: 5});
-            this.setState({location}, () => console.log(this.state.location));
+            this.setState({
+                location,
+                timestamp: location.timestamp
+            }, () => console.log(this.state.location));
         } else {
             Alert.alert(
                 'Alert',
@@ -56,7 +61,11 @@ class InitialLostItemForm extends React.PureComponent<Props, State> {
                 <ButtonDefault title={"Yes"} handleClick={this.getCurrentLocationAsync}/>
                 <ButtonDefault title={"No. Record different time and location"} handleClick={() => {}}/>
                 {this.state.location &&
-                    <Text>{this.state.location.coords.latitude}</Text>
+                    <View>
+                        <Text>Latitude: {this.state.location.coords.latitude}</Text>
+                        <Text>Longitude: {this.state.location.coords.longitude}</Text>
+                        <Text>Timestamp: {this.state.timestamp}</Text>
+                    </View>
                 }
             </View>
         );
