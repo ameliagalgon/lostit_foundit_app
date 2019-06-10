@@ -12,6 +12,7 @@ import { isModalOpen } from "../store/Modals/selectors";
 import Modal from '../components/Shared/Modals/Modal';
 import FoundItemForm from "../containers/Forms/FoundItemForm";
 import LostItemForm from "../containers/Forms/LostItemForm";
+import { ROUTES } from "../store/constants";
 
 interface Props {
     isLostOpen: boolean;
@@ -61,11 +62,14 @@ class HomeScreen extends React.PureComponent<FinalProps> {
     }
 
     handleToggleFoundForm = () => {
+        /*
         if (this.props.isLostOpen || this.props.isFoundOpen) {
             this.props.closeModal();
         } else {
             this.props.openModal(FOUND_ITEM_FORM, {})
         }
+        */
+        this.props.navigation.navigate(ROUTES.FoundForm);
     }
 
     render() {

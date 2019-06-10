@@ -33,7 +33,7 @@ class CameraScreen extends React.PureComponent<Props, State> {
     render() {
         const { hasCameraPermissions } = this.state;
         return (
-            <View>
+            <View style={{flex: 1}}>
                 { hasCameraPermissions === null &&
                     <Text>Has permissions is null</Text>
                 }
@@ -42,6 +42,7 @@ class CameraScreen extends React.PureComponent<Props, State> {
                 }
                 { hasCameraPermissions &&
                     <View style={{ flex: 1 }}>
+                        <Text>WHOOOCHOfdsfdO!</Text>
                         <Camera style={{ flex: 1 }} type={this.state.type}>
                             <View
                                 style={{
