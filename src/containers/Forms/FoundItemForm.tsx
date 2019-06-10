@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { View } from "react-native";
-import { Permissions, Camera } from "expo";
 import InitialFoundItemForm from "../../components/Forms/FoundItem/InitialFoundItemForm";
 import FoundItemDescriptionForm from '../../components/Forms/FoundItem/FoundItemDescriptionForm';
 import CompleteFoundItemForm from "../../components/Forms/FoundItem/CompleteFoundItemForm";
+import {NavigationScreenProps} from "react-navigation";
+import { ROUTES } from "../../store/constants";
 
 interface Props {
     handleToggle: () => void;
@@ -20,8 +21,14 @@ enum FoundItemStages {
     COMPLETE
 }
 
-class FoundItemForm extends React.PureComponent<Props, State> {
-    constructor(props: Props) {
+type FinalProps = NavigationScreenProps & Props;
+
+class FoundItemForm extends React.PureComponent<FinalProps, State> {
+    static navigationOptions = {
+
+    };
+
+    constructor(props: FinalProps) {
         super(props);
         this.state = {
             stage: FoundItemStages.INITIAL,
@@ -29,11 +36,11 @@ class FoundItemForm extends React.PureComponent<Props, State> {
         }
     }
     handleOpenCamera = () => {
-
+        const { navigate } = this.props.navigation;
+        navigate(ROUTES.Camera)
     }
 
     handleGoToNext = () => {
-        console.log("go to next");
         if (this.state.stage === FoundItemStages.INITIAL) {
             this.setState({
                 stage: FoundItemStages.DESCRIPTION

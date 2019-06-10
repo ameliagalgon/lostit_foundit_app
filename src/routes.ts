@@ -3,6 +3,7 @@ import WelcomeScreen from "./screens/WelcomeScreen";
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import HomeScreen from './screens/HomeScreen';
+import CameraScreen from "./screens/CameraScreen";
 import { ROUTES } from './store/constants';
 
 const RootStack = createStackNavigator({
@@ -25,6 +26,12 @@ const RootStack = createStackNavigator({
         screen: HomeScreen,
         navigationOptions: {
             title: 'Home'
+        }
+    },
+    [ROUTES.Camera]: {
+        screen: CameraScreen,
+        navigationOptions: {
+            title: 'Camera'
         }
     },
 }, {

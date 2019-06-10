@@ -2,5 +2,7 @@ export enum ROUTES {
     Welcome = "Welcome",
     Login = "Login",
     Signup = "Signup",
-    HomePage = "Home"
+    HomePage = "Home",
+    Camera = "Camera",
+    FoundForm = "Found Item Form",
 }

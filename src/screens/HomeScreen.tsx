@@ -75,6 +75,7 @@ class HomeScreen extends React.PureComponent<FinalProps> {
         const foundBody = (
             <FoundItemForm
                 handleToggle={this.handleToggleFoundForm}
+                navigation={this.props.navigation}
             />
         );
 
