@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Text } from "react-native";
+// import { Col, Row, Grid } from 'react-native-easy-grid';
 import {Camera, Permissions} from 'expo';
 
 interface Props {
@@ -12,6 +13,8 @@ interface State {
 }
 
 class CameraScreen extends React.PureComponent<Props, State> {
+    camera = null;
+
     state = {
         hasCameraPermissions: null,
         type: Camera.Constants.Type.back
@@ -30,6 +33,12 @@ class CameraScreen extends React.PureComponent<Props, State> {
         });
     }
 
+    snap = async () => {
+        if (this.camera){
+            // let photo = await this.camera.takePictureAsync();
+        }
+    }
+
     render() {
         const { hasCameraPermissions } = this.state;
         return (
@@ -42,8 +51,13 @@ class CameraScreen extends React.PureComponent<Props, State> {
                 }
                 { hasCameraPermissions &&
                     <View style={{ flex: 1 }}>
-                        <Text>WHOOOCHOfdsfdO!</Text>
-                        <Camera style={{ flex: 1 }} type={this.state.type}>
+                        <Camera
+                            ref={(camera: any) => {
+                                this.camera = camera
+                            }}
+                            style={{ flex: 1 }}
+                            type={this.state.type}
+                        >
                             <View
                                 style={{
                                     flex: 1,
@@ -66,8 +80,19 @@ class CameraScreen extends React.PureComponent<Props, State> {
                                     }}>
                                     <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
                                 </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={{
+                                        flex: 0.1,
+                                        alignSelf: "flex-end",
+                                        alignItems: "center"
+                                    }}
+                                    onPress={this.snap}
+                                >
+                                    <Text style={{ fontSize: 18, marginBottom: 10, color: 'white'}}> Snap </Text>
+                                </TouchableOpacity>
                             </View>
                         </Camera>
+
                     </View>
                 }
             </View>

@@ -21,6 +21,7 @@
     "buildAndStart": "yarn run build && yarn run watchAndStart "
   },
   "dependencies": {
+    "@expo/vector-icons": "^10.0.2",
     "@types/react-redux": "^7.0.9",
     "expo": "^31.0.2",
     "expokit": "^31.1.0",
@@ -29,6 +30,7 @@
     "prop-types": "^15.7.2",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
+    "react-native-easy-grid": "^0.2.1",
     "react-native-elements": "^1.1.0",
     "react-native-modal-datetime-picker": "^7.4.2",
     "react-native-scripts": "^2.0.1",

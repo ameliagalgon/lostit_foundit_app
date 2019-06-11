@@ -77,7 +77,7 @@ class HomeScreen extends React.PureComponent<FinalProps> {
 
     render() {
         // const { navigation: {state: { params } } } = this.props;
-        const { loading, error, user } = this.state;
+        const { loading, error } = this.state;
 
         /*
         const foundBody = (
@@ -117,9 +117,6 @@ class HomeScreen extends React.PureComponent<FinalProps> {
                     {error && <Text>Error...</Text>}
                     {!loading && !error &&
                     <View>
-                        {user && user.firstName &&
-                            <Text>Hi, {user.firstName}</Text>
-                        }
                         <ButtonDefault title={"Lost something"} handleClick={this.handleToggleLostForm}/>
                         <ButtonDefault title={"Found something"} handleClick={this.handleToggleFoundForm}/>
                         <ButtonDefault title={"My Lost items"} handleClick={() => this.props.navigation.navigate(ROUTES.LostItems)}/>
