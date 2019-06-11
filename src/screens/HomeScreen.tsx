@@ -5,7 +5,7 @@ import { NavigationScreenProps } from "react-navigation";
 import ButtonDefault from "../components/Shared/Ui/ButtonDefault";
 import { Location } from "expo";
 
-import { fetchItems } from '../utils/api';
+import { fetchRandomUser } from '../utils/api';
 import { openModal, closeModal } from "../store/Modals/actionCreators";
 import { connect } from "react-redux";
 import { AppState } from "../store/types";
@@ -30,6 +30,7 @@ class HomeScreen extends React.PureComponent<FinalProps> {
     };
 
     state = {
+        user: null,
         items: [],
         loading: true,
         error: false,
@@ -38,9 +39,9 @@ class HomeScreen extends React.PureComponent<FinalProps> {
     async componentDidMount() {
         try {
             console.log(Location);
-            const items = await fetchItems();
+            const user = await fetchRandomUser();
             this.setState({
-                items,
+                user,
                 loading: false,
                 error: false
             });
@@ -75,8 +76,8 @@ class HomeScreen extends React.PureComponent<FinalProps> {
     }
 
     render() {
-        const { navigation: {state: { params } } } = this.props;
-        const { loading, error } = this.state;
+        // const { navigation: {state: { params } } } = this.props;
+        const { loading, error, user } = this.state;
 
         /*
         const foundBody = (
@@ -116,8 +117,8 @@ class HomeScreen extends React.PureComponent<FinalProps> {
                     {error && <Text>Error...</Text>}
                     {!loading && !error &&
                     <View>
-                        {params && params.user &&
-                        <Text>Hi, {params.user.firstName}</Text>
+                        {user && user.firstName &&
+                            <Text>Hi, {user.firstName}</Text>
                         }
                         <ButtonDefault title={"Lost something"} handleClick={this.handleToggleLostForm}/>
                         <ButtonDefault title={"Found something"} handleClick={this.handleToggleFoundForm}/>

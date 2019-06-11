@@ -3,18 +3,20 @@ import { Text, KeyboardAvoidingView, StyleSheet } from 'react-native';
 import ButtonDefault from '../components/Shared/Ui/ButtonDefault';
 import Input from '../components/Shared/Ui/Input';
 import {NavigationScreenProps} from "react-navigation";
-import User from '../store/Auth/models/User';
+// import User from '../store/Auth/models/User';
 import { ROUTES } from "../store/constants";
 
 class LoginScreen extends React.PureComponent<NavigationScreenProps> {
     handleLogin = () => {
         const { navigation: { navigate } } = this.props;
+        /*
         const defaultUser: User = {
             firstName: "Amelia",
             lastName: "Galgon",
             email: "agalgon@gmail.com"
         };
-        navigate(ROUTES.HomePage, {user: defaultUser});
+        */
+        navigate(ROUTES.HomePage);
     }
 
     render () {

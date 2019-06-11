@@ -3,6 +3,7 @@ import uuidv4 from 'uuid/v4';
 import sleep from '../utils/sleep';
 
 import itemList from './mock/items';
+import randomUser from './mock/user';
 
 const mapContact = contact => {
   const { name, picture, phone, cell, email } = contact;
@@ -28,3 +29,9 @@ export const fetchItems = async () => {
     );
   });
 };
+
+export const fetchRandomUser = async () => {
+  await sleep(500);
+
+  return randomUser.results[0];
+}
