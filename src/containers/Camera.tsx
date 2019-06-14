@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Dimensions, View, Text } from "react-native";
 import { Camera, Permissions } from "expo";
 import Toolbar from '../components/Shared/Ui/Camera/Toolbar';
+import Gallery from '../components/Shared/Ui/Camera/Gallery';
 
 const { width: winWidth, height: winHeight } = Dimensions.get('window');
 
@@ -37,7 +38,7 @@ class CameraView extends React.PureComponent {
             flashMode: prevState.flashMode === Camera.Constants.FlashMode.off ?
                 Camera.Constants.FlashMode.on :
                 Camera.Constants.FlashMode.off
-        }));
+        }), () => console.log(this.state.flashMode));
     };
 
     setCameraType = () => {
@@ -45,14 +46,14 @@ class CameraView extends React.PureComponent {
             ...prevState,
             cameraType: prevState.cameraType === Camera.Constants.Type.back ?
                 Camera.Constants.Type.front : Camera.Constants.Type.back
-        }));
+        }), () => console.log(this.state.cameraType));
     };
 
     handleCaptureIn = () => {
         this.setState((prevState: State) => ({
             ...prevState,
             capturing: true
-        }));
+        }), () => console.log(this.state.capturing));
     };
 
     handleShortCapture = async () => {
@@ -60,8 +61,8 @@ class CameraView extends React.PureComponent {
         this.setState((prevState: State) => ({
             ...prevState,
             capturing: false,
-            captures: [photoData, prevState.captures]
-        }));
+            captures: [photoData, ...prevState.captures]
+        }), () => console.log(this.state.captures));
     };
 
     render() {
@@ -77,7 +78,12 @@ class CameraView extends React.PureComponent {
                 <Camera
                     style={styles.preview}
                     ref={(camera: any) => this.camera = camera}
+                    flashMode={this.state.flashMode}
+                    type={this.state.cameraType}
                 />
+                {this.state.captures.length > 0 &&
+                    <Gallery captures={this.state.captures}/>
+                }
                 <Toolbar
                     setCameraType={this.setCameraType}
                     setFlashMode={this.setFlashMode}
