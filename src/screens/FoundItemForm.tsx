@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Image, StyleSheet, View} from "react-native";
+import { ImageURISource, View} from "react-native";
 import {connect} from "react-redux";
 import {NavigationScreenProps} from "react-navigation";
 
@@ -9,14 +9,13 @@ import CompleteFoundItemForm from "../components/Forms/FoundItem/CompleteFoundIt
 import { ROUTES } from "../store/constants";
 import {AppState} from "../store/types";
 import {getLastPhoto} from "../store/Camera/selectors";
-// import {Photo} from "../store/Camera/types";
 
 interface OuterProps {
     handleToggle: () => void;
 }
 
 interface Props {
-    itemPhoto: any;
+    itemPhoto: ImageURISource;
 }
 
 interface State {
@@ -94,21 +93,6 @@ class FoundItemForm extends React.PureComponent<FinalProps, State> {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    galleryContainer: {
-        bottom: 100
-    },
-    galleryImageContainer: {
-        width: 100,
-        height: 100,
-        marginRight: 5
-    },
-    galleryImage: {
-        width: 100,
-        height: 100
-    }
-});
 
 const mapStateToProps = (state: AppState) => ({
     itemPhoto: getLastPhoto(state)

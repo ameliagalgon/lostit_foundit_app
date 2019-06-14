@@ -3,7 +3,6 @@ import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { Header } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import ButtonDefault from "../components/Shared/Ui/ButtonDefault";
-import { Location } from "expo";
 
 import { fetchRandomUser } from '../utils/api';
 import { openModal, closeModal } from "../store/Modals/actionCreators";
