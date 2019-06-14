@@ -46,8 +46,23 @@ class CameraView extends React.PureComponent {
             cameraType: prevState.cameraType === Camera.Constants.Type.back ?
                 Camera.Constants.Type.front : Camera.Constants.Type.back
         }));
-    }
+    };
 
+    handleCaptureIn = () => {
+        this.setState((prevState: State) => ({
+            ...prevState,
+            capturing: true
+        }));
+    };
+
+    handleShortCapture = async () => {
+        const photoData = await this.camera.takePictureAsync();
+        this.setState((prevState: State) => ({
+            ...prevState,
+            capturing: false,
+            captures: [photoData, prevState.captures]
+        }));
+    };
 
     render() {
         const { hasCameraPermissions } = this.state;
@@ -63,7 +78,15 @@ class CameraView extends React.PureComponent {
                     style={styles.preview}
                     ref={(camera: any) => this.camera = camera}
                 />
-                <Toolbar/>
+                <Toolbar
+                    setCameraType={this.setCameraType}
+                    setFlashMode={this.setFlashMode}
+                    capturing={this.state.capturing}
+                    cameraType={this.state.cameraType}
+                    flashMode={this.state.flashMode}
+                    onCaptureIn={this.handleCaptureIn}
+                    onShortCapture={this.handleShortCapture}
+                />
             </View>
         );
     }

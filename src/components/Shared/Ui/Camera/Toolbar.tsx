@@ -11,8 +11,6 @@ interface Props {
     setFlashMode: () => void;
     setCameraType: () => void;
     onCaptureIn: () => void;
-    onCaptureOut: () => void;
-    onLongCapture: () => void;
     onShortCapture: () => void;
 }
 
@@ -68,7 +66,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     bottomToolbar: {
-        width: 100%,
+        width: 100,
         position: 'absolute',
         height: 100,
         bottom: 0,

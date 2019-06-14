@@ -21,7 +21,7 @@
     "buildAndStart": "yarn run build && yarn run watchAndStart "
   },
   "dependencies": {
-    "@expo/vector-icons": "^10.0.2",
+    "@expo/vector-icons": "^8.1.0",
     "@types/react-redux": "^7.0.9",
     "expo": "^31.0.2",
     "expokit": "^31.1.0",
