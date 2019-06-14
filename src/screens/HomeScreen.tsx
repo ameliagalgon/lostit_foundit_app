@@ -38,7 +38,7 @@ class HomeScreen extends React.PureComponent<FinalProps> {
 
     async componentDidMount() {
         try {
-            console.log(Location);
+            // console.log(Location);
             const user = await fetchRandomUser();
             this.setState({
                 user,
@@ -54,59 +54,15 @@ class HomeScreen extends React.PureComponent<FinalProps> {
     }
 
     handleToggleLostForm = () => {
-        /*
-        if (this.props.isLostOpen || this.props.isFoundOpen) {
-            this.props.closeModal();
-        } else {
-            this.props.openModal(LOST_ITEM_FORM, {})
-        }
-        */
         this.props.navigation.navigate(ROUTES.LostForm);
     }
 
     handleToggleFoundForm = () => {
-        /*
-        if (this.props.isLostOpen || this.props.isFoundOpen) {
-            this.props.closeModal();
-        } else {
-            this.props.openModal(FOUND_ITEM_FORM, {})
-        }
-        */
         this.props.navigation.navigate(ROUTES.FoundForm);
     }
 
     render() {
-        // const { navigation: {state: { params } } } = this.props;
         const { loading, error } = this.state;
-
-        /*
-        const foundBody = (
-            <FoundItemForm
-                handleToggle={this.handleToggleFoundForm}
-                navigation={this.props.navigation}
-            />
-        );
-
-        const lostBody = (
-            <LostItemForm/>
-        );
-        */
-
-        /*
-                <Modal
-                    isOpen={this.props.isLostOpen}
-                    body={lostBody}
-                    title={"Lost item"}
-                    handleClose={this.props.closeModal}
-                />
-                <Modal
-                    isOpen={this.props.isFoundOpen}
-                    handleClose={this.props.closeModal}
-                    title={"Found item"}
-                    body={foundBody}
-                />
-                */
-
         return (
             <View style={styles.container}>
                 <Header

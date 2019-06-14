@@ -2,17 +2,15 @@ import React from 'react';
 import { View } from "react-native";
 
 import CameraView from '../containers/Camera';
-
-interface Props {
-
-}
+import {ROUTES} from "../store/constants";
+import {NavigationScreenProps} from "react-navigation";
 
 interface State {
     hasCameraPermissions: boolean | any;
     type: string;
 }
 
-class CameraScreen extends React.PureComponent<Props, State> {
+class CameraScreen extends React.PureComponent<NavigationScreenProps, State> {
     /*
     camera = null;
 
@@ -41,11 +39,15 @@ class CameraScreen extends React.PureComponent<Props, State> {
     }
     */
 
+    goBack = () => {
+        this.props.navigation.navigate(ROUTES.FoundForm);
+    }
+
     render() {
         // const { hasCameraPermissions } = this.state;
         return (
             <View style={{flex: 1}}>
-                <CameraView/>
+                <CameraView goBack={this.goBack}/>
             </View>
         );
     }

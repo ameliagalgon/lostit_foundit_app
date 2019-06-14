@@ -5,17 +5,11 @@ interface Props {
     captures: any[];
 }
 
-const Gallery: React.FunctionComponent<Props> = ({ captures }) => (
+const Gallery: React.FunctionComponent<Props> = (props) => (
     <ScrollView
         horizontal={true}
         style={[styles.galleryContainer]}
     >
-        {captures.map(({ uri }, i) => (
-            <View style={styles.galleryImageContainer} key={i}>
-                <Text>{uri}</Text>
-                <Image source={{ uri }} style={styles.galleryImage}/>
-            </View>
-        ))}
     </ScrollView>
 );
 
@@ -33,5 +27,14 @@ const styles = StyleSheet.create({
         height: 75
     }
 });
+
+/*
+*
+* {captures.map(({ uri }, i) => (
+            <View style={styles.galleryImageContainer} key={i}>
+                <Text>{uri}</Text>
+                <Image source={{ uri }} style={styles.galleryImage}/>
+            </View>
+        ))}*/
 
 export default Gallery;

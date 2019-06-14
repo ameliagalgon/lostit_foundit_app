@@ -1,10 +1,20 @@
 import React from 'react';
+import {connect} from "react-redux";
+
 import { StyleSheet, Dimensions, View, Text } from "react-native";
 import { Camera, Permissions } from "expo";
 import Toolbar from '../components/Shared/Ui/Camera/Toolbar';
-import Gallery from '../components/Shared/Ui/Camera/Gallery';
+import { saveImage } from "../store/Camera/actionCreators";
 
 const { width: winWidth, height: winHeight } = Dimensions.get('window');
+
+interface Props {
+    saveImage: (photoData: any[]) => void;
+}
+
+interface OuterProps {
+    goBack: () => void;
+}
 
 interface State {
     captures: any[];
@@ -14,7 +24,9 @@ interface State {
     hasCameraPermissions: boolean | any;
 }
 
-class CameraView extends React.PureComponent {
+type FinalProps = OuterProps & Props;
+
+class CameraView extends React.PureComponent<FinalProps, State> {
     camera: any = null;
 
     state: State = {
@@ -38,7 +50,7 @@ class CameraView extends React.PureComponent {
             flashMode: prevState.flashMode === Camera.Constants.FlashMode.off ?
                 Camera.Constants.FlashMode.on :
                 Camera.Constants.FlashMode.off
-        }), () => console.log(this.state.flashMode));
+        }));
     };
 
     setCameraType = () => {
@@ -46,23 +58,20 @@ class CameraView extends React.PureComponent {
             ...prevState,
             cameraType: prevState.cameraType === Camera.Constants.Type.back ?
                 Camera.Constants.Type.front : Camera.Constants.Type.back
-        }), () => console.log(this.state.cameraType));
+        }));
     };
 
     handleCaptureIn = () => {
         this.setState((prevState: State) => ({
             ...prevState,
             capturing: true
-        }), () => console.log(this.state.capturing));
+        }));
     };
 
     handleShortCapture = async () => {
         const photoData = await this.camera.takePictureAsync();
-        this.setState((prevState: State) => ({
-            ...prevState,
-            capturing: false,
-            captures: [photoData, ...prevState.captures]
-        }), () => console.log(this.state.captures));
+        this.props.saveImage(photoData);
+        this.props.goBack();
     };
 
     render() {
@@ -81,9 +90,6 @@ class CameraView extends React.PureComponent {
                     flashMode={this.state.flashMode}
                     type={this.state.cameraType}
                 />
-                {this.state.captures.length > 0 &&
-                    <Gallery captures={this.state.captures}/>
-                }
                 <Toolbar
                     setCameraType={this.setCameraType}
                     setFlashMode={this.setFlashMode}
@@ -108,6 +114,10 @@ const styles = StyleSheet.create({
         right: 0,
         bottom: 0,
     }
-})
+});
 
-export default CameraView;
+const mapDispatchToProps = {
+    saveImage
+};
+
+export default connect(null, mapDispatchToProps)(CameraView);

@@ -1,6 +1,6 @@
 import { SNAP, SAVE } from "./actions";
 
-export const saveImage = (photoData: any) => ({
+export const saveImage = (photoData: any[]) => ({
     type: SAVE,
     photoData
 });

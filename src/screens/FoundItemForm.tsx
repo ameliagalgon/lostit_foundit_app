@@ -1,13 +1,22 @@
 import * as React from 'react';
-import { View } from "react-native";
+import {Image, StyleSheet, View} from "react-native";
+import {connect} from "react-redux";
+import {NavigationScreenProps} from "react-navigation";
+
 import InitialFoundItemForm from "../components/Forms/FoundItem/InitialFoundItemForm";
 import FoundItemDescriptionForm from '../components/Forms/FoundItem/FoundItemDescriptionForm';
 import CompleteFoundItemForm from "../components/Forms/FoundItem/CompleteFoundItemForm";
-import {NavigationScreenProps} from "react-navigation";
 import { ROUTES } from "../store/constants";
+import {AppState} from "../store/types";
+import {getLastPhoto} from "../store/Camera/selectors";
+// import {Photo} from "../store/Camera/types";
+
+interface OuterProps {
+    handleToggle: () => void;
+}
 
 interface Props {
-    handleToggle: () => void;
+    itemPhoto: any;
 }
 
 interface State {
@@ -21,7 +30,7 @@ enum FoundItemStages {
     COMPLETE
 }
 
-type FinalProps = NavigationScreenProps & Props;
+type FinalProps = NavigationScreenProps & OuterProps & Props;
 
 class FoundItemForm extends React.PureComponent<FinalProps, State> {
     static navigationOptions = {
@@ -67,6 +76,7 @@ class FoundItemForm extends React.PureComponent<FinalProps, State> {
                 <InitialFoundItemForm
                     handleNext={this.handleGoToNext}
                     handleOpenCamera={this.handleOpenCamera}
+                    photo={this.props.itemPhoto}
                 />
                 }
                 { this.state.stage === FoundItemStages.DESCRIPTION &&
@@ -85,4 +95,23 @@ class FoundItemForm extends React.PureComponent<FinalProps, State> {
     }
 }
 
-export default FoundItemForm;
+const styles = StyleSheet.create({
+    galleryContainer: {
+        bottom: 100
+    },
+    galleryImageContainer: {
+        width: 100,
+        height: 100,
+        marginRight: 5
+    },
+    galleryImage: {
+        width: 100,
+        height: 100
+    }
+});
+
+const mapStateToProps = (state: AppState) => ({
+    itemPhoto: getLastPhoto(state)
+});
+
+export default connect(mapStateToProps)(FoundItemForm);
