@@ -1,8 +1,12 @@
-import { SNAP, SAVE } from "./actions";
+import {SNAP, SAVE, RESET} from "./actions";
 
-export const saveImage = (photoData: any[]) => ({
+export const saveImage = (photoData: any) => ({
     type: SAVE,
     photoData
+});
+
+export const resetCapture = () => ({
+    type: RESET
 });
 
 export const snap = () => ({

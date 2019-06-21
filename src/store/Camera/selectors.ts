@@ -7,5 +7,5 @@ export const getCameraState = (state: AppState) => state.camera ? state.camera :
 
 export const getLastPhoto = createSelector(
     getCameraState,
-    (state: CameraState) => state.captures[0]
+    (state: CameraState) => state.capture
 );

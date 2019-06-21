@@ -55,10 +55,6 @@ class InitialLostItemForm extends React.PureComponent<Props, State> {
         }
     };
 
-    handleNext = () => {
-        this.getCurrentLocationAsync().then(() => this.props.handleGoToDescription)
-    };
-
     render() {
         return (
             <View style={styles.container}>

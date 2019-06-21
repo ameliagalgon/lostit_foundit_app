@@ -10,6 +10,7 @@ import DateTimeFoundItemForm from "../components/Forms/FoundItem/DateTimeFoundIt
 import { ROUTES } from "../store/constants";
 import {AppState} from "../store/types";
 import {getLastPhoto} from "../store/Camera/selectors";
+import { resetCapture } from "../store/Camera/actionCreators";
 
 interface OuterProps {
     handleToggle: () => void;
@@ -17,6 +18,7 @@ interface OuterProps {
 
 interface Props {
     itemPhoto: ImageURISource;
+    resetCapture: () => void;
 }
 
 interface State {
@@ -80,6 +82,10 @@ class FoundItemForm extends React.PureComponent<FinalProps, State> {
         this.props.navigation.navigate(ROUTES.HomePage);
     };
 
+    handleSave = () => {
+
+    }
+
     render() {
         return (
             <View>
@@ -103,6 +109,7 @@ class FoundItemForm extends React.PureComponent<FinalProps, State> {
                 <CompleteFoundItemForm
                     handleClose={this.handleClose}
                     handleNext={this.handleGoToNext}
+                    handleReset={this.props.resetCapture}
                 />
                 }
             </View>
@@ -114,4 +121,8 @@ const mapStateToProps = (state: AppState) => ({
     itemPhoto: getLastPhoto(state)
 });
 
-export default connect(mapStateToProps)(FoundItemForm);
+const mapDispatchToProps = {
+    resetCapture
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FoundItemForm);
