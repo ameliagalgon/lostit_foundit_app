@@ -32,7 +32,7 @@ class InitialLostItemForm extends React.PureComponent<Props, State> {
             this.setState({
                 location,
                 timestamp: location.timestamp
-            }, () => this.props.handleGoToDescription); // go to new stage after getting location
+            }, this.props.handleGoToDescription); // go to new stage after getting location
         } else {
             Alert.alert(
                 'Alert',
@@ -53,6 +53,10 @@ class InitialLostItemForm extends React.PureComponent<Props, State> {
                 },
             );
         }
+    };
+
+    handleNext = () => {
+        this.getCurrentLocationAsync().then(() => this.props.handleGoToDescription)
     };
 
     render() {

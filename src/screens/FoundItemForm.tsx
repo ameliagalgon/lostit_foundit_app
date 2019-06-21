@@ -6,6 +6,7 @@ import {NavigationScreenProps} from "react-navigation";
 import InitialFoundItemForm from "../components/Forms/FoundItem/InitialFoundItemForm";
 import FoundItemDescriptionForm from '../components/Forms/FoundItem/FoundItemDescriptionForm';
 import CompleteFoundItemForm from "../components/Forms/FoundItem/CompleteFoundItemForm";
+import DateTimeFoundItemForm from "../components/Forms/FoundItem/DateTimeFoundItemForm";
 import { ROUTES } from "../store/constants";
 import {AppState} from "../store/types";
 import {getLastPhoto} from "../store/Camera/selectors";
@@ -25,6 +26,7 @@ interface State {
 
 enum FoundItemStages {
     INITIAL,
+    MANUAL_DATA_INPUT,
     DESCRIPTION,
     COMPLETE
 }
@@ -48,11 +50,21 @@ class FoundItemForm extends React.PureComponent<FinalProps, State> {
         navigate(ROUTES.Camera)
     }
 
+    handleGoToDescription = () => {
+        this.setState({
+            stage: FoundItemStages.DESCRIPTION
+        });
+    };
+
     handleGoToNext = () => {
         if (this.state.stage === FoundItemStages.INITIAL) {
             this.setState({
-                stage: FoundItemStages.DESCRIPTION
+                stage: FoundItemStages.MANUAL_DATA_INPUT
             });
+        } else if (this.state.stage === FoundItemStages.MANUAL_DATA_INPUT) {
+            this.setState({
+                stage: FoundItemStages.DESCRIPTION
+            })
         } else if (this.state.stage === FoundItemStages.DESCRIPTION) {
             this.setState({
                 stage: FoundItemStages.COMPLETE
@@ -62,11 +74,11 @@ class FoundItemForm extends React.PureComponent<FinalProps, State> {
                 stage: FoundItemStages.INITIAL
             });
         }
-    }
+    };
 
     handleClose = () => {
         this.props.navigation.navigate(ROUTES.HomePage);
-    }
+    };
 
     render() {
         return (
@@ -74,13 +86,17 @@ class FoundItemForm extends React.PureComponent<FinalProps, State> {
                 { this.state.stage === FoundItemStages.INITIAL &&
                 <InitialFoundItemForm
                     handleNext={this.handleGoToNext}
-                    handleOpenCamera={this.handleOpenCamera}
-                    photo={this.props.itemPhoto}
+                    handleGoToDescription={this.handleGoToDescription}
                 />
+                }
+                { this.state.stage === FoundItemStages.MANUAL_DATA_INPUT &&
+                    <DateTimeFoundItemForm handleNext={this.handleGoToNext}/>
                 }
                 { this.state.stage === FoundItemStages.DESCRIPTION &&
                 <FoundItemDescriptionForm
                     handleNext={this.handleGoToNext}
+                    handleOpenCamera={this.handleOpenCamera}
+                    photo={this.props.itemPhoto}
                 />
                 }
                 { this.state.stage === FoundItemStages.COMPLETE &&
