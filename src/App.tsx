@@ -18,9 +18,10 @@ class App extends React.PureComponent<Props, State>{
     constructor(props: Props) {
         super(props);
         this.state = {
-            signedIn: !!this.props.currentUser
+            signedIn: false,
         };
     }
+
     render() {
         // const { currentUser } = this.props;
         return (

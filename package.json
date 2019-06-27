@@ -26,6 +26,7 @@
     "@types/react-redux": "^7.0.9",
     "expo": "^31.0.2",
     "expokit": "^31.1.0",
+    "firebase": "^6.2.3",
     "formik": "^1.5.7",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
