@@ -5,17 +5,27 @@ import Input from '../components/Shared/Ui/Input';
 import {NavigationScreenProps} from "react-navigation";
 // import User from '../store/Auth/models/User';
 import { ROUTES } from "../store/constants";
+import { setUser } from "../store/Auth/actionCreators";
+import User from '../store/Auth/models/user';
+import {generateUUID} from "../helpers/uuid";
+import {connect} from "react-redux";
 
-class LoginScreen extends React.PureComponent<NavigationScreenProps> {
+interface Props {
+    setUser: (user: any) => void;
+}
+
+type FinalProps = NavigationScreenProps & Props;
+
+class LoginScreen extends React.PureComponent<FinalProps> {
     handleLogin = () => {
         const { navigation: { navigate } } = this.props;
-        /*
         const defaultUser: User = {
-            firstName: "Amelia",
-            lastName: "Galgon",
-            email: "agalgon@gmail.com"
+            id: generateUUID(),
+            firstName: "Test",
+            lastName: "User",
+            email: "test@gmail.com"
         };
-        */
+        this.props.setUser(defaultUser);
         navigate(ROUTES.HomePage);
     }
 
@@ -42,4 +52,8 @@ const styles = StyleSheet.create({
     }
 });
 
-export default LoginScreen;
+const mapDispatchToProps = {
+    setUser
+};
+
+export default connect(null, mapDispatchToProps)(LoginScreen);

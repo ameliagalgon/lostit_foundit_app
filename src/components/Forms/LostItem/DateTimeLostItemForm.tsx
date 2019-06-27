@@ -1,6 +1,5 @@
 import React from "react";
 import {View, Text, StyleSheet} from "react-native";
-import DateTimePicker from "react-native-modal-datetime-picker";
 import ButtonDefault from "../../Shared/Ui/ButtonDefault";
 import DatePicker from "../../Shared/Ui/DatePicker";
 import TimePicker from "../../Shared/Ui/TimePicker";

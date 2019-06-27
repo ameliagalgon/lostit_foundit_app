@@ -11,12 +11,14 @@ import { AppState } from "../store/types";
 import { isModalOpen } from "../store/Modals/selectors";
 // import Modal from '../components/Shared/Modals/Modal';
 import { ROUTES } from "../store/constants";
+import {getUser} from "../store/Auth/selectors";
 
 interface Props {
     isLostOpen: boolean;
     isFoundOpen: boolean;
     openModal: (name: string, params: any) => void;
     closeModal: () => void;
+    currentUser: any;
 }
 
 const LOST_ITEM_FORM = "Lost item form";
@@ -57,7 +59,7 @@ class HomeScreen extends React.PureComponent<FinalProps> {
     }
 
     handleToggleFoundForm = () => {
-        this.props.navigation.navigate(ROUTES.FoundForm);
+        this.props.navigation.navigate(ROUTES.FoundForm, {currentUser: this.props.currentUser});
     }
 
     render() {
@@ -72,6 +74,9 @@ class HomeScreen extends React.PureComponent<FinalProps> {
                     {error && <Text>Error...</Text>}
                     {!loading && !error &&
                     <View>
+                        {this.props.currentUser.firstName &&
+                            <Text>Hi, {this.props.currentUser.firstName}</Text>
+                        }
                         <ButtonDefault title={"Lost something"} handleClick={this.handleToggleLostForm}/>
                         <ButtonDefault title={"Found something"} handleClick={this.handleToggleFoundForm}/>
                         <ButtonDefault title={"My Lost items"} handleClick={() => this.props.navigation.navigate(ROUTES.LostItems)}/>
@@ -96,7 +101,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state: AppState) => ({
     isLostOpen: isModalOpen(state, {name: LOST_ITEM_FORM}),
-    isFoundOpen: isModalOpen(state, {name: FOUND_ITEM_FORM})
+    isFoundOpen: isModalOpen(state, {name: FOUND_ITEM_FORM}),
+    currentUser: getUser(state),
 });
 
 const mapDispatchToProps = {

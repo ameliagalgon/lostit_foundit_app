@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ImageURISource, View} from "react-native";
+import {ImageURISource, StyleSheet, View} from "react-native";
 import {connect} from "react-redux";
 import {NavigationScreenProps} from "react-navigation";
 
@@ -11,14 +11,19 @@ import { ROUTES } from "../store/constants";
 import {AppState} from "../store/types";
 import {getLastPhoto} from "../store/Camera/selectors";
 import { resetCapture } from "../store/Camera/actionCreators";
+import { ItemType } from "../store/Items/types";
+import { initNewItem } from "../store/Items/actionCreators";
+import {getUser} from "../store/Auth/selectors";
 
 interface OuterProps {
     handleToggle: () => void;
 }
 
 interface Props {
+    currentUser: any;
     itemPhoto: ImageURISource;
     resetCapture: () => void;
+    initNewItem: (user: any, itemType: string) => void;
 }
 
 interface State {
@@ -47,6 +52,11 @@ class FoundItemForm extends React.PureComponent<FinalProps, State> {
             hasCameraPermissions: false
         }
     }
+
+    componentDidMount() {
+        this.props.initNewItem(this.props.currentUser, ItemType.Found);
+    }
+
     handleOpenCamera = () => {
         const { navigate } = this.props.navigation;
         navigate(ROUTES.Camera)
@@ -82,13 +92,9 @@ class FoundItemForm extends React.PureComponent<FinalProps, State> {
         this.props.navigation.navigate(ROUTES.HomePage);
     };
 
-    handleSave = () => {
-
-    }
-
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 { this.state.stage === FoundItemStages.INITIAL &&
                 <InitialFoundItemForm
                     handleNext={this.handleGoToNext}
@@ -117,12 +123,20 @@ class FoundItemForm extends React.PureComponent<FinalProps, State> {
     }
 }
 
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+});
+
 const mapStateToProps = (state: AppState) => ({
-    itemPhoto: getLastPhoto(state)
+    itemPhoto: getLastPhoto(state),
+    currentUser: getUser(state),
 });
 
 const mapDispatchToProps = {
-    resetCapture
+    resetCapture,
+    initNewItem
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FoundItemForm);

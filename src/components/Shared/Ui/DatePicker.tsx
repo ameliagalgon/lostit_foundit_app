@@ -15,6 +15,7 @@ interface State {
 }
 
 class DatePicker extends React.PureComponent<Props, State> {
+    input = null;
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -45,6 +46,7 @@ class DatePicker extends React.PureComponent<Props, State> {
         return (
             <View>
                 <Input
+                    ref={this.input}
                     onFocus={this.showDatePicker}
                     // editable={false}
                     value={Moment(this.state.date).format("MM/DD/YYYY")}

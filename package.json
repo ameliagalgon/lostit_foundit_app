@@ -18,7 +18,8 @@
     "watchAndRunIOS": "concurrently \"yarn run watch\" \"yarn run ios\"",
     "buildRunIOS": "yarn run build && yarn run watchAndRunIOS ",
     "watchAndStart": "concurrently \"yarn run watch\" \"yarn run start\"",
-    "buildAndStart": "yarn run build && yarn run watchAndStart "
+    "buildAndStart": "yarn run build && yarn run watchAndStart ",
+    "debug": "open ‘rndebugger://set-debugger-loc?host=localhost&port=19001’"
   },
   "dependencies": {
     "@expo/vector-icons": "^8.1.0",

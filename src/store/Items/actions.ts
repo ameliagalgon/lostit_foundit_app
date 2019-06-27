@@ -5,7 +5,8 @@ export const INIT_NEW = "store/items/init";
 export const UPDATE = "store/items/update";
 
 export interface InitNewAction extends Action {
-    user: User
+    user: User;
+    itemType: string;
 }
 
 export interface UpdateCurrentAction extends Action{

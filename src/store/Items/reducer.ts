@@ -8,7 +8,12 @@ export const itemsReducer = (state: ItemsState = initialState, action: ItemsActi
     switch(action.type) {
         case INIT_NEW:
             return {
-                newItem: {...initialNewItem, id: generateUUID(), user: (<InitNewAction> action).user}
+                newItem: {
+                    ...initialNewItem,
+                    id: generateUUID(),
+                    type: (<InitNewAction> action).itemType,
+                    user: (<InitNewAction> action).user,
+                }
             };
         case UPDATE:
             const currentItem = state.newItem ? state.newItem : {};
