@@ -1,5 +1,5 @@
 import React from 'react';
-import Fire from '../../Fire';
+// import Fire from '../../Fire';
 import { Text, KeyboardAvoidingView, StyleSheet} from 'react-native';
 import {NavigationScreenProps} from "react-navigation";
 // import User from "../store/Auth/models/user";
@@ -23,10 +23,12 @@ class SignupScreen extends React.PureComponent<NavigationScreenProps, State> {
     }
 
     handleSignUp = () => {
+        /*
         const { email, password } = this.state;
         Fire.shared.signUp(email, password).then(() => {
             this.props.navigation.navigate(ROUTES.HomePage);
         });
+        */
     };
 
     render () {

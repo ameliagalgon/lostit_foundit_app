@@ -22,6 +22,11 @@ class App extends React.PureComponent<Props, State>{
         };
     }
 
+    componentDidMount() {
+
+    }
+
+
     render() {
         // const { currentUser } = this.props;
         return (

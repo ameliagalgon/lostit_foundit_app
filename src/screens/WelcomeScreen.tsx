@@ -8,6 +8,7 @@ import {
 import ButtonDefault from '../components/Shared/Ui/ButtonDefault';
 import { ROUTES } from "../store/constants";
 // import { IOS_CLIENT_ID } from 'react-native-dotenv';
+import AuthService from '../services/Auth';
 
 interface Props {
     user: User;
@@ -65,6 +66,10 @@ class WelcomeScreen extends React.PureComponent<FinalProps> {
 
     constructor(props: FinalProps) {
         super(props);
+    }
+
+    componentDidMount() {
+        AuthService.logout();
     }
 
 

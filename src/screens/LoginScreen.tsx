@@ -1,50 +1,53 @@
 import React from 'react';
+import { Input } from "react-native-elements";
 import { Text, KeyboardAvoidingView, StyleSheet } from 'react-native';
 import ButtonDefault from '../components/Shared/Ui/ButtonDefault';
-import Input from '../components/Shared/Ui/Input';
 import {NavigationScreenProps} from "react-navigation";
 // import User from '../store/Auth/models/User';
 import { ROUTES } from "../store/constants";
 import { setUser } from "../store/Auth/actionCreators";
-import User from '../store/Auth/models/user';
-import {generateUUID} from "../helpers/uuid";
 import {connect} from "react-redux";
+
+import AuthService from '../services/Auth';
 
 interface Props {
     setUser: (user: any) => void;
 }
 
+interface State {
+    email: string;
+    password: string;
+}
+
 type FinalProps = NavigationScreenProps & Props;
 
-class LoginScreen extends React.PureComponent<FinalProps> {
+class LoginScreen extends React.PureComponent<FinalProps, State> {
+
     handleLogin = () => {
         const { navigation: { navigate } } = this.props;
-        const defaultUser: User = {
-            id: generateUUID(),
-            firstName: "Test",
-            lastName: "User",
-            email: "test@gmail.com"
-        };
-        this.props.setUser(defaultUser);
+        const { email, password } = this.state;
+        AuthService.loginWithEmailAndPass(email, password);
         navigate(ROUTES.HomePage);
-    }
+    };
 
     render () {
         return (
             <KeyboardAvoidingView
-                style={styles.container}
+                style={newStyles.container}
                 behavior={"padding"}
             >
                 <Text>Login</Text>
-                <Input placeholder={"Email"}/>
-                <Input placeholder={"Password"} hidden={true}/>
+                <Input placeholder={"Email"} onChangeText={(email: string) => {
+                    this.setState({ email })
+                }}/>
+                <Input placeholder={"Password"} onChangeText={(password: string) => this.setState({ password })} secureTextEntry={true}/>
                 <ButtonDefault title={"Log in"} handleClick={this.handleLogin}/>
             </KeyboardAvoidingView>
         )
     }
 }
 
-const styles = StyleSheet.create({
+const newStyles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
@@ -52,8 +55,4 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapDispatchToProps = {
-    setUser
-};
-
-export default connect(null, mapDispatchToProps)(LoginScreen);
+export default LoginScreen;
