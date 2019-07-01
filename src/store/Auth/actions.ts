@@ -6,7 +6,7 @@ export const GET_USER = 'store/user/getUser';
 
 export type GetUserAction = Action;
 export interface SetUserAction extends Action {
-    user: User;
+    user: any;
 }
 
 export type AuthAction = SetUserAction | GetUserAction;

@@ -5,29 +5,29 @@ import ButtonDefault from '../components/Shared/Ui/ButtonDefault';
 import {NavigationScreenProps} from "react-navigation";
 // import User from '../store/Auth/models/User';
 import { ROUTES } from "../store/constants";
-import { setUser } from "../store/Auth/actionCreators";
-import {connect} from "react-redux";
 
 import AuthService from '../services/Auth';
-
-interface Props {
-    setUser: (user: any) => void;
-}
 
 interface State {
     email: string;
     password: string;
 }
 
-type FinalProps = NavigationScreenProps & Props;
+type FinalProps = NavigationScreenProps;
 
 class LoginScreen extends React.PureComponent<FinalProps, State> {
+    state = {
+        email: '',
+        password: ''
+    };
 
     handleLogin = () => {
         const { navigation: { navigate } } = this.props;
         const { email, password } = this.state;
-        AuthService.loginWithEmailAndPass(email, password);
-        navigate(ROUTES.HomePage);
+        AuthService.loginWithEmailAndPass(email, password).then(() => {
+            navigate(ROUTES.HomePage)
+        });
+        // navigate(ROUTES.HomePage);
     };
 
     render () {
@@ -37,10 +37,12 @@ class LoginScreen extends React.PureComponent<FinalProps, State> {
                 behavior={"padding"}
             >
                 <Text>Login</Text>
-                <Input placeholder={"Email"} onChangeText={(email: string) => {
-                    this.setState({ email })
-                }}/>
-                <Input placeholder={"Password"} onChangeText={(password: string) => this.setState({ password })} secureTextEntry={true}/>
+                <Input
+                    value={this.state.email}
+                    placeholder={"Email"}
+                    onChangeText={email => this.setState({ email })}
+                />
+                <Input placeholder={"Password"} onChangeText={password => this.setState({ password })} secureTextEntry={true}/>
                 <ButtonDefault title={"Log in"} handleClick={this.handleLogin}/>
             </KeyboardAvoidingView>
         )

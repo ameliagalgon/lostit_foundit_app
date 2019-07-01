@@ -8,7 +8,7 @@ export const getUser = () => ({
     type: GET_USER
 });
 
-export const setUser = (user: User) => ({
+export const setUser = (user: any) => ({
     type: SET_USER,
     user
 });

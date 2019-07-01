@@ -1,30 +1,27 @@
 import React from 'react';
 import { Provider } from 'react-redux'
-import User from './store/Auth/models/user';
 import AppContainer from './routes';
-
-interface Props {
-    currentUser?: User;
-}
+import AuthService from './services/Auth';
+import { setUser } from "./store/Auth/actionCreators";
 
 interface State {
-    signedIn: boolean;
+    user: firebase.User | null;
 }
 
 import configureStore from './store/configureStore';
 const store = configureStore({});
 
-class App extends React.PureComponent<Props, State>{
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            signedIn: false,
-        };
-    }
+class App extends React.PureComponent<{}, State>{
+    state: State = {
+        user: null
+    };
 
     componentDidMount() {
-
+        AuthService.subscribeAuthChange(user => {
+            this.setState({ user }, () => setUser(this.state.user));
+        });
     }
+
 
 
     render() {

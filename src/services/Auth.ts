@@ -6,12 +6,14 @@ export default class AuthService{
      * Login with Email and Password
      * https://medium.com/datadriveninvestor/facebook-login-with-react-native-expo-firebase-and-typescript-56df4ed6099a
      */
-    public static async loginWithEmailAndPass(email: string, pass:string) {
-        await Firebase.auth().signInWithEmailAndPassword(email, pass).then((user) => {
-            if (user) {
-                console.log('user signed in');
-            }
-        }).catch(e => console.log(e.message));
+    public static async loginWithEmailAndPass(email: string, pass: string) {
+        if (email && pass) {
+            await Firebase.auth().signInWithEmailAndPassword(email, pass).then((user) => {
+                if (user) {
+                    console.log('user signed in');
+                }
+            }).catch(e => console.log(e.message));
+        }
     }
 
     public static async logout() {

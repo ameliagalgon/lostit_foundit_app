@@ -6,7 +6,6 @@ import {NavigationScreenProps} from "react-navigation";
 // import Input from "../components/Shared/Ui/Input";
 import { Input } from "react-native-elements";
 import ButtonDefault from "../components/Shared/Ui/ButtonDefault";
-import { ROUTES } from "../store/constants";
 
 interface State {
     email: string;

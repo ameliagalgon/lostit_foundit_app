@@ -4,12 +4,12 @@ import { Header } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import ButtonDefault from "../components/Shared/Ui/ButtonDefault";
 
-import { fetchRandomUser } from '../utils/api';
 import { openModal, closeModal } from "../store/Modals/actionCreators";
 import { connect } from "react-redux";
 import { AppState } from "../store/types";
 import { isModalOpen } from "../store/Modals/selectors";
 // import Modal from '../components/Shared/Modals/Modal';
+
 import { ROUTES } from "../store/constants";
 import {getUser} from "../store/Auth/selectors";
 
@@ -33,26 +33,10 @@ class HomeScreen extends React.PureComponent<FinalProps> {
     state = {
         user: null,
         items: [],
-        loading: true,
+        loading: false,
         error: false,
     };
 
-    async componentDidMount() {
-        try {
-            // console.log(Location);
-            const user = await fetchRandomUser();
-            this.setState({
-                user,
-                loading: false,
-                error: false
-            });
-        } catch (e) {
-            this.setState({
-                loading: false,
-                error: true
-            });
-        }
-    }
 
     handleToggleLostForm = () => {
         this.props.navigation.navigate(ROUTES.LostForm);
@@ -64,6 +48,7 @@ class HomeScreen extends React.PureComponent<FinalProps> {
 
     render() {
         const { loading, error } = this.state;
+        console.log(this.props.currentUser);
         return (
             <View style={styles.container}>
                 <Header
@@ -74,8 +59,8 @@ class HomeScreen extends React.PureComponent<FinalProps> {
                     {error && <Text>Error...</Text>}
                     {!loading && !error &&
                     <View>
-                        {this.props.currentUser.firstName &&
-                            <Text>Hi, {this.props.currentUser.firstName}</Text>
+                        {this.props.currentUser.email &&
+                            <Text>Hi, {this.props.currentUser.email}</Text>
                         }
                         <ButtonDefault title={"Lost something"} handleClick={this.handleToggleLostForm}/>
                         <ButtonDefault title={"Found something"} handleClick={this.handleToggleFoundForm}/>
@@ -107,7 +92,7 @@ const mapStateToProps = (state: AppState) => ({
 
 const mapDispatchToProps = {
     openModal,
-    closeModal
+    closeModal,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
