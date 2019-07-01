@@ -8,10 +8,12 @@ export default class AuthService{
      */
     public static async loginWithEmailAndPass(email: string, pass: string) {
         if (email && pass) {
-            await Firebase.auth().signInWithEmailAndPassword(email, pass).then((user) => {
-                if (user) {
-                    console.log('user signed in');
-                }
+            await Firebase.auth().signInWithEmailAndPassword(email, pass).then(result => {
+                const user = result.user;
+                return user ? {
+                    email: user.email,
+                    displayName: user.displayName,
+                } : null
             }).catch(e => console.log(e.message));
         }
     }
@@ -25,7 +27,7 @@ export default class AuthService{
      *
      * @param callback Called with the current authenticated user as first argument
      */
-    public static subscribeAuthChange(callback: (user: firebase.User | null) => void) {
+    public static subscribeAuthChange(callback: (user: any) => void) {
         Firebase.auth().onAuthStateChanged(callback);
     }
 }

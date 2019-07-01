@@ -7,13 +7,19 @@ import {NavigationScreenProps} from "react-navigation";
 import { ROUTES } from "../store/constants";
 
 import AuthService from '../services/Auth';
+import {setUser} from "../store/Auth/actionCreators";
+import { connect } from "react-redux";
+
+interface Props {
+    setUser: (user: any) => void;
+}
 
 interface State {
     email: string;
     password: string;
 }
 
-type FinalProps = NavigationScreenProps;
+type FinalProps = NavigationScreenProps & Props;
 
 class LoginScreen extends React.PureComponent<FinalProps, State> {
     state = {
@@ -24,10 +30,8 @@ class LoginScreen extends React.PureComponent<FinalProps, State> {
     handleLogin = () => {
         const { navigation: { navigate } } = this.props;
         const { email, password } = this.state;
-        AuthService.loginWithEmailAndPass(email, password).then(() => {
-            navigate(ROUTES.HomePage)
-        });
-        // navigate(ROUTES.HomePage);
+        AuthService.loginWithEmailAndPass(email, password);
+        navigate(ROUTES.HomePage);
     };
 
     render () {
@@ -57,4 +61,8 @@ const newStyles = StyleSheet.create({
     }
 });
 
-export default LoginScreen;
+const mapDispatchToProps = {
+    setUser,
+};
+
+export default connect(null, mapDispatchToProps)(LoginScreen);

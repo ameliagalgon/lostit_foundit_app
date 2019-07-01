@@ -69,6 +69,7 @@ class WelcomeScreen extends React.PureComponent<FinalProps> {
     }
 
     componentDidMount() {
+        // TODO: Check to see if a user is already logged in
         AuthService.logout();
     }
 

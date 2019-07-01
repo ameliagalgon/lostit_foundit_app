@@ -31,12 +31,20 @@ class HomeScreen extends React.PureComponent<FinalProps> {
     };
 
     state = {
-        user: null,
+        // user: null,
         items: [],
-        loading: false,
+        loading: true,
         error: false,
     };
 
+    componentDidUpdate() {
+        if (this.props.currentUser) {
+            this.setState({
+                loading: false,
+                error: false
+            })
+        }
+    }
 
     handleToggleLostForm = () => {
         this.props.navigation.navigate(ROUTES.LostForm);
@@ -48,7 +56,7 @@ class HomeScreen extends React.PureComponent<FinalProps> {
 
     render() {
         const { loading, error } = this.state;
-        console.log(this.props.currentUser);
+        // console.log(this.props.currentUser);
         return (
             <View style={styles.container}>
                 <Header
