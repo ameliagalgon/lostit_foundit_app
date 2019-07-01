@@ -31,6 +31,10 @@ export default class AuthService{
         }
     }
 
+    public static getCurrentUser() {
+        return Firebase.auth().currentUser;
+    }
+
     /**
      * Register a subscription callback for changes of the currently authenticated user
      *

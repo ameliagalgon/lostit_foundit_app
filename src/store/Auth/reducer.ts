@@ -3,14 +3,7 @@ import {
     SET_USER, SetUserAction
 } from "./actions";
 import { initialState } from "./constants";
-
-const isEmpty = (obj: Object) => {
-    for(let key in obj) {
-        if(obj.hasOwnProperty(key))
-            return false;
-    }
-    return true;
-}
+import { isEmpty } from "../../helpers/object";
 
 export const authReducer = (state: AuthState = initialState, action: SetUserAction) => {
     switch (action.type) {

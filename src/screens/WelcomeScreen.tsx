@@ -1,17 +1,18 @@
 import React from "react";
 // import { Google } from 'expo';
+import { AppState } from "../store/types";
 import { StyleSheet, Text, View} from "react-native";
-import User from '../store/Auth/models/user';
 import {
     NavigationScreenProps,
 } from "react-navigation";
 import ButtonDefault from '../components/Shared/Ui/ButtonDefault';
 import { ROUTES } from "../store/constants";
 // import { IOS_CLIENT_ID } from 'react-native-dotenv';
-import AuthService from '../services/Auth';
+import {getUser} from "../store/Auth/selectors";
+import {connect} from "react-redux";
 
 interface Props {
-    user: User;
+    currentUser: any;
 }
 
 const styles = StyleSheet.create({
@@ -64,13 +65,18 @@ class WelcomeScreen extends React.PureComponent<FinalProps> {
     }
     */
 
+
     constructor(props: FinalProps) {
         super(props);
     }
 
     componentDidMount() {
         // TODO: Check to see if a user is already logged in
-        AuthService.logout();
+        const { currentUser } = this.props;
+        if (currentUser) {
+            this.props.navigation.navigate(ROUTES.HomePage);
+        }
+        //AuthService.logout();
     }
 
 
@@ -96,4 +102,8 @@ class WelcomeScreen extends React.PureComponent<FinalProps> {
     }
 }
 
-export default WelcomeScreen;
+const mapStateToProps = (state: AppState) => ({
+    currentUser: getUser(state),
+});
+
+export default connect(mapStateToProps)(WelcomeScreen);

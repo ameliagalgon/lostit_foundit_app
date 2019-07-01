@@ -8,10 +8,12 @@ import { openModal, closeModal } from "../store/Modals/actionCreators";
 import { connect } from "react-redux";
 import { AppState } from "../store/types";
 import { isModalOpen } from "../store/Modals/selectors";
+import { isEmpty } from "../helpers/object";
 // import Modal from '../components/Shared/Modals/Modal';
 
 import { ROUTES } from "../store/constants";
 import {getUser} from "../store/Auth/selectors";
+import AuthService from "../services/Auth";
 
 interface Props {
     isLostOpen: boolean;
@@ -21,24 +23,29 @@ interface Props {
     currentUser: any;
 }
 
+interface State {
+    loading: boolean;
+    error: boolean;
+}
+
 const LOST_ITEM_FORM = "Lost item form";
 const FOUND_ITEM_FORM = "Found item form";
 type FinalProps = NavigationScreenProps & Props;
 
-class HomeScreen extends React.PureComponent<FinalProps> {
+class HomeScreen extends React.PureComponent<FinalProps, State> {
     static navigationOptions = {
         header: null,
     };
 
     state = {
         // user: null,
-        items: [],
-        loading: true,
+        // items: [],
+        loading: isEmpty(this.props.currentUser),
         error: false,
     };
 
-    componentDidUpdate() {
-        if (this.props.currentUser) {
+    componentDidUpdate(prevProps: Props, prevState: any) {
+        if (prevState.loading && prevProps.currentUser !== this.props.currentUser) {
             this.setState({
                 loading: false,
                 error: false
@@ -52,6 +59,16 @@ class HomeScreen extends React.PureComponent<FinalProps> {
 
     handleToggleFoundForm = () => {
         this.props.navigation.navigate(ROUTES.FoundForm, {currentUser: this.props.currentUser});
+    }
+
+    handleLogout = () => {
+        this.setState({
+            loading: true
+        }, () => {
+            AuthService.logout().then(() => {
+                this.props.navigation.navigate(ROUTES.Welcome);
+            });
+        })
     }
 
     render() {
@@ -73,6 +90,7 @@ class HomeScreen extends React.PureComponent<FinalProps> {
                         <ButtonDefault title={"Lost something"} handleClick={this.handleToggleLostForm}/>
                         <ButtonDefault title={"Found something"} handleClick={this.handleToggleFoundForm}/>
                         <ButtonDefault title={"My Lost items"} handleClick={() => this.props.navigation.navigate(ROUTES.LostItems)}/>
+                        <ButtonDefault title={"Logout"} handleClick={this.handleLogout}/>
                     </View>
                     }
                 </View>
