@@ -56,7 +56,7 @@ class HomeScreen extends React.PureComponent<FinalProps> {
 
     render() {
         const { loading, error } = this.state;
-        // console.log(this.props.currentUser);
+        console.log(this.props.currentUser);
         return (
             <View style={styles.container}>
                 <Header

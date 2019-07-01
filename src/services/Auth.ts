@@ -22,6 +22,15 @@ export default class AuthService{
         await Firebase.auth().signOut();
     }
 
+    public static async createUserWithEmailAndPass(email: string, pass: string) {
+        if (email && pass) {
+            await Firebase.auth().createUserWithEmailAndPassword(email, pass).then(result => {
+                const user = result.user;
+                console.log(user);
+            }).catch(e => console.log(e.message));
+        }
+    }
+
     /**
      * Register a subscription callback for changes of the currently authenticated user
      *

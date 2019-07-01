@@ -1,15 +1,18 @@
 import React from 'react';
 // import Fire from '../../Fire';
-import { Text, KeyboardAvoidingView, StyleSheet} from 'react-native';
+import {Text, KeyboardAvoidingView, StyleSheet, Alert} from 'react-native';
 import {NavigationScreenProps} from "react-navigation";
 // import User from "../store/Auth/models/user";
 // import Input from "../components/Shared/Ui/Input";
 import { Input } from "react-native-elements";
 import ButtonDefault from "../components/Shared/Ui/ButtonDefault";
+import AuthService from '../services/Auth';
+import {ROUTES} from "../store/constants";
 
 interface State {
     email: string;
     password: string;
+    passwordConfirmation: string;
 }
 
 class SignupScreen extends React.PureComponent<NavigationScreenProps, State> {
@@ -18,16 +21,24 @@ class SignupScreen extends React.PureComponent<NavigationScreenProps, State> {
         this.state = {
             email: "",
             password: "",
+            passwordConfirmation: ""
         };
     }
 
     handleSignUp = () => {
-        /*
-        const { email, password } = this.state;
-        Fire.shared.signUp(email, password).then(() => {
+        const { email, password, passwordConfirmation } = this.state;
+        if (password === passwordConfirmation) {
+            //create and sign in user
+            AuthService.createUserWithEmailAndPass(email, password);
             this.props.navigation.navigate(ROUTES.HomePage);
-        });
-        */
+        } else {
+            Alert.alert('Error',
+                'Your password and password confirmation do not match',
+                [
+                    {text: 'OK', onPress: () => console.log('OK Pressed'), style: 'cancel'},
+                ],
+                {cancelable: false},)
+        }
     };
 
     render () {
@@ -37,11 +48,9 @@ class SignupScreen extends React.PureComponent<NavigationScreenProps, State> {
                 behavior={"padding"}
             >
                 <Text>Sign Up</Text>
-                <Input placeholder={"First name"}/>
-                <Input placeholder={"Last name"}/>
                 <Input placeholder={"Email"} onChangeText={(email: string) => this.setState({ email } )}/>
                 <Input placeholder={"Password"} secureTextEntry={true} onChangeText={(password: string) => this.setState({ password } )}/>
-                <Input placeholder={"Confirm password"} secureTextEntry={true}/>
+                <Input placeholder={"Confirm password"} secureTextEntry={true} onChangeText={(passwordConfirmation: string) => this.setState({ passwordConfirmation })}/>
                 <ButtonDefault title={"Sign up"} handleClick={this.handleSignUp}/>
             </KeyboardAvoidingView>
         )
